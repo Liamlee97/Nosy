@@ -24,6 +24,9 @@ import {
   Lightbulb,
   Wind
 } from 'lucide-react';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import Newsletter from '@/components/Newsletter';
 
 
 
@@ -50,38 +53,7 @@ export default function HomePage() {
       />
       <ScrollToTop />
       {/* Header */}
-      <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50 dark:bg-slate-950/80 dark:border-slate-800">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-green-600 rounded-full flex items-center justify-center">
-                <Wind className="text-white w-5 h-5" />
-              </div>
-              <div>
-                <h1 className="text-xl font-bold text-gray-900 dark:text-white">Nosy</h1>
-                <p className="text-xs text-gray-600 dark:text-gray-400">Smell science in plain language</p>
-              </div>
-            </div>
-
-            <nav className="hidden md:flex items-center space-x-6">
-              <Link to="/articles" className="text-gray-700 hover:text-blue-600 transition-colors dark:text-gray-300 dark:hover:text-blue-400">Research News</Link>
-              <Link to="/conditions" className="text-gray-700 hover:text-blue-600 transition-colors dark:text-gray-300 dark:hover:text-blue-400">Conditions</Link>
-              <Link to="/science101" className="text-gray-700 hover:text-blue-600 transition-colors dark:text-gray-300 dark:hover:text-blue-400">Science 101</Link>
-              <Link to="/community" className="text-gray-700 hover:text-blue-600 transition-colors dark:text-gray-300 dark:hover:text-blue-400">Community</Link>
-              <Link to="/about" className="text-gray-700 hover:text-blue-600 transition-colors dark:text-gray-300 dark:hover:text-blue-400">About</Link>
-              <Link to="/contact" className="text-gray-700 hover:text-blue-600 transition-colors dark:text-gray-300 dark:hover:text-blue-400">Contact</Link>
-              <ModeToggle />
-            </nav>
-
-            <div className="flex items-center gap-2 md:hidden">
-              <ModeToggle />
-              <Button variant="outline" size="sm">
-                Menu
-              </Button>
-            </div>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       <main>
         {/* Hero Section */}
@@ -208,86 +180,15 @@ export default function HomePage() {
         </section>
 
         {/* Newsletter Signup */}
-        <section className="py-16 px-4 bg-gradient-to-r from-blue-600 to-green-600 text-white">
-          <div className="container mx-auto max-w-4xl text-center">
-            <div className="mb-8">
-              <Mail className="w-12 h-12 mx-auto mb-4" />
-              <h3 className="text-3xl font-bold mb-4">Stay Updated</h3>
-              <p className="text-xl opacity-90 mb-8">
-                Get monthly summaries of the latest smell research and treatment advances
-              </p>
-            </div>
-
-            <form onSubmit={handleNewsletterSignup} className="max-w-md mx-auto">
-              <div className="flex gap-3">
-                <Input
-                  type="email"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className="flex-1 bg-white text-gray-900 border-0"
-                  aria-label="Email address"
-                />
-                <Button type="submit" variant="secondary">
-                  Subscribe
-                </Button>
-              </div>
-              <p className="text-sm opacity-75 mt-3">
-                No spam, unsubscribe anytime. Read our privacy policy.
-              </p>
-            </form>
-          </div>
-        </section>
+        {/* Newsletter Signup */}
+        <Newsletter />
 
 
       </main>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8 px-4 dark:bg-black">
-        <div className="container mx-auto max-w-6xl">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            {/* Left side - Branding */}
-            <div className="flex items-center space-x-2 mb-6 md:mb-0">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-green-600 rounded-full flex items-center justify-center">
-                <Wind className="text-white w-5 h-5" />
-              </div>
-              <div>
-                <span className="text-xl font-bold">Nosy</span>
-                <p className="text-gray-400 text-sm">Smell science in plain language</p>
-              </div>
-            </div>
-
-            {/* Right side - Legal Links */}
-            <div className="flex space-x-6 text-sm text-gray-400">
-              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-white transition-colors">Terms of Use</a>
-            </div>
-          </div>
-
-          <Separator className="my-6 bg-gray-800" />
-
-          <div className="flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
-            <div>
-              © 2025 Nosy. All rights reserved.
-            </div>
-            <div className="mt-4 md:mt-0">
-              <span className="mr-4">🔬 Written by scientists</span>
-              <span className="mr-4">💡 For everyone</span>
-              <span>❤️ With empathy</span>
-            </div>
-          </div>
-
-          {/* Medical Disclaimer */}
-          <div className="mt-6 p-4 bg-gray-800 rounded-lg dark:bg-gray-900">
-            <p className="text-xs text-gray-400 text-center">
-              <strong>Medical Disclaimer:</strong> This website provides educational information about olfactory research and conditions.
-              It is not intended as medical advice and should not replace consultation with qualified healthcare professionals.
-              Always consult your doctor for personalized medical guidance.
-            </p>
-          </div>
-        </div>
-      </footer>
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }

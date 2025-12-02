@@ -6,17 +6,17 @@ import { Separator } from '@/components/ui/separator';
 import SEO from '@/components/SEO';
 import { ModeToggle } from '@/components/ModeToggle';
 import {
-  ArrowLeft,
-  Users,
+  TrendingUp,
   AlertTriangle,
   Stethoscope,
-  TrendingUp,
-  Wind,
   AlertCircle,
   CheckCircle,
   XCircle,
-  Clock
+  Clock,
+  Users
 } from 'lucide-react';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 import { conditionsData } from '@/data/conditions';
 
@@ -54,27 +54,8 @@ export default function ConditionDetailPage() {
         description={condition.shortDescription}
       />
       {/* Header */}
-      <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50 dark:bg-slate-950/80 dark:border-slate-800">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <Link to="/conditions">
-                <Button variant="ghost" size="sm">
-                  <ArrowLeft className="w-4 h-4 mr-2" />
-                  Back to Conditions
-                </Button>
-              </Link>
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-green-600 rounded-full flex items-center justify-center">
-                  <Wind className="text-white w-5 h-5" />
-                </div>
-                <span className="text-xl font-bold text-gray-900 dark:text-white">Nosy</span>
-              </div>
-            </div>
-            <ModeToggle />
-          </div>
-        </div>
-      </header>
+      {/* Header */}
+      <Header />
 
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         {/* Condition Header */}
@@ -278,6 +259,7 @@ export default function ConditionDetailPage() {
           </CardContent>
         </Card>
       </div>
+      <Footer />
     </div>
   );
 }
