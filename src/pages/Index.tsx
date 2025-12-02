@@ -92,7 +92,7 @@ export default function HomePage() {
                     ~1 in 5
                     <Citation href="https://pubmed.ncbi.nlm.nih.gov/32746612/" number={1} />
                   </div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">People with smell loss globally</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">People with olfactory dysfunction globally</div>
                 </CardContent>
               </Card>
               <Card className="text-center hover:shadow-md transition-shadow dark:bg-slate-900 dark:border-slate-800">

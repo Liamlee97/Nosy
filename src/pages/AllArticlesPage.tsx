@@ -23,7 +23,6 @@ import {
 } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import Newsletter from '@/components/Newsletter';
 
 import { getAllArticles } from '@/data/articles/index';
 
@@ -233,9 +232,6 @@ export default function AllArticlesPage() {
         )}
       </div>
 
-      {/* Newsletter CTA */}
-      {/* Newsletter CTA */}
-      <Newsletter />
       <Footer />
     </div >
   );

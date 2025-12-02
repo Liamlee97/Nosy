@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Separator } from '@/components/ui/separator';
 
 export default function Footer() {
@@ -20,8 +21,8 @@ export default function Footer() {
 
                     {/* Right side - Legal Links */}
                     <div className="flex space-x-6 text-sm text-gray-400">
-                        <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-                        <a href="#" className="hover:text-white transition-colors">Terms of Use</a>
+                        <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+                        <Link to="/terms" className="hover:text-white transition-colors">Terms of Use</Link>
                     </div>
                 </div>
 

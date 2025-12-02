@@ -14,7 +14,6 @@ import {
 } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import Newsletter from '@/components/Newsletter';
 import { getAllConditions } from '@/data/conditions';
 
 const categories = ["All", "Complete Loss", "Distorted Perception", "Phantom Perception", "Reduced Perception", "Viral-Related", "Congenital", "Age-Related"];
@@ -220,9 +219,6 @@ export default function AllConditionsPage() {
         </div>
       </main>
 
-      {/* Newsletter CTA */}
-      {/* Newsletter CTA */}
-      <Newsletter />
       <Footer />
     </div>
   );
