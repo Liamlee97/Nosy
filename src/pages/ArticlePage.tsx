@@ -23,7 +23,8 @@ import Footer from '@/components/Footer';
 import { articlesData, getArticleById, getAllArticles } from '@/data/articles/index';
 
 // Get related articles (excluding current)
-const getRelatedArticles = (currentId: number) => {
+// Get related articles (excluding current)
+const getRelatedArticles = (currentId: string) => {
   return getAllArticles()
     .filter(article => article.id !== currentId)
     .slice(0, 2);
@@ -33,7 +34,7 @@ export default function ArticlePage() {
   const { id } = useParams();
   const [email, setEmail] = useState('');
 
-  const article = id ? articlesData[Number(id) as keyof typeof articlesData] : undefined;
+  const article = id ? articlesData[id] : undefined;
 
   if (!article) {
     return (
@@ -91,7 +92,8 @@ export default function ArticlePage() {
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Content */}
-          <div className="lg:col-span-2">
+          {/* Main Content */}
+          <div className="lg:col-span-3">
             {/* Article Header */}
             <div className="mb-8">
               <div className="flex items-center space-x-4 mb-4">
@@ -132,6 +134,17 @@ export default function ArticlePage() {
               </div>
             </div>
 
+            {/* Hero Image */}
+            {article.heroImage && (
+              <div className="mb-10 rounded-xl overflow-hidden shadow-lg">
+                <img
+                  src={article.heroImage}
+                  alt={article.title}
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            )}
+
             <Separator className="mb-8 dark:bg-slate-800" />
 
             {/* Article Content */}
@@ -148,6 +161,16 @@ export default function ArticlePage() {
                     .replace(/\*(.*?)\*/g, '<em class="italic">$1</em>')
                     .replace(/- \*\*(.*?)\*\*/g, '<li class="ml-4"><strong class="font-semibold">$1</strong></li>')
                     .replace(/(\d+)\. \*\*(.*?)\*\*/g, '<div class="ml-4 mb-2"><strong class="font-semibold">$1. $2</strong></div>')
+                    .replace(/\[(\d+)\]/g, '<sup><a href="#source-$1" class="text-blue-600 hover:underline">[$1]</a></sup>')
+                    // Custom Callout Block
+                    .replace(/:::callout<br>(.*?)<br>:::/g, '<div class="my-8 p-6 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg dark:bg-slate-900 dark:border-blue-400"><p class="text-lg font-medium text-gray-800 dark:text-gray-200 italic">$1</p></div>')
+                    // Custom Image Block
+                    .replace(/:::image\((.*?)\)/g, (match, key) => {
+                      const img = article.images?.[key];
+                      if (!img) return '';
+                      const sourceHtml = img.source ? `<span class="block text-xs text-gray-400 mt-1">Source: ${img.source}</span>` : '';
+                      return `<figure class="my-8"><img src="${img.url}" alt="${img.caption}" class="w-full rounded-lg shadow-md" /><figcaption class="mt-2 text-center text-sm text-gray-500 dark:text-gray-400 italic">${img.caption}${sourceHtml}</figcaption></figure>`;
+                    })
                 }}
               />
             </div>
@@ -161,7 +184,7 @@ export default function ArticlePage() {
                 </h3>
                 <ul className="space-y-3">
                   {article.sources.map((source, index) => (
-                    <li key={index} className="flex items-start space-x-3">
+                    <li key={index} id={`source-${index + 1}`} className="flex items-start space-x-3">
                       <span className="text-sm text-gray-500 mt-1 dark:text-gray-400">{index + 1}.</span>
                       <div>
                         <a
@@ -173,9 +196,6 @@ export default function ArticlePage() {
                           {source.title}
                           <ExternalLink className="w-3 h-3 ml-1" />
                         </a>
-                        <Badge variant="outline" className="text-xs mt-1 dark:border-slate-700 dark:text-gray-400">
-                          {source.type}
-                        </Badge>
                       </div>
                     </li>
                   ))}
@@ -201,83 +221,6 @@ export default function ArticlePage() {
                 </Button>
               </div>
             </div>
-          </div>
-
-          {/* Sidebar */}
-          <div className="space-y-8">
-            {/* Newsletter Signup */}
-            <Card className="dark:bg-slate-900 dark:border-slate-800">
-              <CardHeader>
-                <CardTitle className="flex items-center text-lg dark:text-white">
-                  <Mail className="w-5 h-5 mr-2 text-blue-600" />
-                  Stay Updated
-                </CardTitle>
-                <CardDescription className="dark:text-gray-400">
-                  Get monthly summaries of the latest smell research
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleNewsletterSignup} className="space-y-3">
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-950 dark:border-slate-700 dark:text-white"
-                  />
-                  <Button type="submit" className="w-full">
-                    Subscribe
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
-
-            {/* Related Articles */}
-            <Card className="dark:bg-slate-900 dark:border-slate-800">
-              <CardHeader>
-                <CardTitle className="text-lg dark:text-white">Related Articles</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {getRelatedArticles(article.id).map((relatedArticle) => (
-                  <div key={relatedArticle.id} className="border-b border-gray-100 pb-4 last:border-b-0 dark:border-slate-800">
-                    <h4 className="font-medium text-gray-900 mb-2 leading-tight dark:text-white">
-                      <Link to={`/article/${relatedArticle.id}`} className="hover:text-blue-600 transition-colors dark:hover:text-blue-400">
-                        {relatedArticle.title}
-                      </Link>
-                    </h4>
-                    <p className="text-sm text-gray-600 mb-2 dark:text-gray-400">
-                      {relatedArticle.excerpt}
-                    </p>
-                    <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
-                      <Badge variant="secondary" className="text-xs dark:bg-slate-800 dark:text-gray-300">
-                        {relatedArticle.category}
-                      </Badge>
-                      <div className="flex items-center">
-                        <Clock className="w-3 h-3 mr-1" />
-                        {relatedArticle.readingTime} min
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-
-            {/* Quick Links */}
-            <Card className="dark:bg-slate-900 dark:border-slate-800">
-              <CardHeader>
-                <CardTitle className="text-lg dark:text-white">Quick Links</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-2 text-sm">
-                  <li><Link to="/conditions" className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">Understanding Conditions</Link></li>
-                  <li><a href="#" className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">Smell Training Guide</a></li>
-                  <li><a href="#" className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">Find a Specialist</a></li>
-                  <li><a href="#" className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">Support Groups</a></li>
-                  <li><Link to="/articles" className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">All Research Updates</Link></li>
-                </ul>
-              </CardContent>
-            </Card>
           </div>
         </div>
         <Footer />

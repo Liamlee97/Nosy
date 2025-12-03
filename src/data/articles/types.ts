@@ -1,5 +1,5 @@
 export interface Article {
-    id: number;
+    id: string;
     title: string;
     excerpt: string;
     category: string;
@@ -11,7 +11,13 @@ export interface Article {
     sources?: {
         title: string;
         url: string;
-        type: string;
+        type?: string;
     }[];
     slug?: string;
+    heroImage?: string;
+    images?: Record<string, {
+        url: string;
+        caption: string;
+        source?: string;
+    }>;
 }
