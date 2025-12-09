@@ -136,11 +136,11 @@ export default function ArticlePage() {
 
             {/* Hero Image */}
             {article.heroImage && (
-              <div className="mb-10 rounded-xl overflow-hidden shadow-lg">
+              <div className="mb-10 rounded-xl overflow-hidden shadow-lg max-w-4xl mx-auto">
                 <img
                   src={article.heroImage}
                   alt={article.title}
-                  className="w-full h-auto object-cover"
+                  className="w-full max-h-[500px] object-cover"
                 />
               </div>
             )}
@@ -169,7 +169,7 @@ export default function ArticlePage() {
                       const img = article.images?.[key];
                       if (!img) return '';
                       const sourceHtml = img.source ? `<span class="block text-xs text-gray-400 mt-1">Source: ${img.source}</span>` : '';
-                      return `<figure class="my-8"><img src="${img.url}" alt="${img.caption}" class="w-full rounded-lg shadow-md" /><figcaption class="mt-2 text-center text-sm text-gray-500 dark:text-gray-400 italic">${img.caption}${sourceHtml}</figcaption></figure>`;
+                      return `<figure class="my-8 max-w-2xl mx-auto"><img src="${img.url}" alt="${img.caption}" class="w-full rounded-lg shadow-md" /><figcaption class="mt-2 text-center text-sm text-gray-500 dark:text-gray-400 italic">${img.caption}${sourceHtml}</figcaption></figure>`;
                     })
                 }}
               />

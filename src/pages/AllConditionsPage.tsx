@@ -16,7 +16,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { getAllConditions } from '@/data/conditions';
 
-const categories = ["All", "Complete Loss", "Distorted Perception", "Phantom Perception", "Reduced Perception", "Viral-Related", "Congenital", "Age-Related"];
+const categories = ["All", "Quantitative Disorders", "Qualitative Disorders", "Central/Processing Disorders"];
 
 export default function AllConditionsPage() {
   const [allConditions] = useState(getAllConditions());
@@ -130,17 +130,12 @@ export default function AllConditionsPage() {
                 {filteredConditions.map((condition) => (
                   <Link key={condition.id} to={`/condition/${condition.id}`}>
                     <Card className="h-full hover:shadow-md transition-shadow duration-300 cursor-pointer border-gray-100 overflow-hidden group dark:bg-slate-900 dark:border-slate-800">
-                      <div className={`h-2 w-full bg-${condition.color}-500`} />
+                      <div className={`h-2 w-full ${condition.color === 'blue' ? 'bg-blue-500' : condition.color === 'orange' ? 'bg-orange-500' : 'bg-purple-500'}`} />
                       <CardHeader>
                         <div className="flex justify-between items-start mb-2">
                           <Badge variant="secondary" className="bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-slate-800 dark:text-gray-300">
                             {condition.category}
                           </Badge>
-                          {condition.severity === "High" && (
-                            <Badge variant="destructive" className="bg-red-100 text-red-700 hover:bg-red-200 border-0 dark:bg-red-900/30 dark:text-red-400">
-                              High Severity
-                            </Badge>
-                          )}
                         </div>
                         <CardTitle className="text-xl group-hover:text-blue-600 transition-colors dark:text-white dark:group-hover:text-blue-400">
                           {condition.name}
@@ -161,17 +156,10 @@ export default function AllConditionsPage() {
                           </div>
                         </div>
 
-                        <div className="flex flex-wrap gap-2 mt-4">
-                          {condition.symptoms.slice(0, 3).map((symptom, idx) => (
-                            <span key={idx} className="text-xs bg-gray-50 text-gray-600 px-2 py-1 rounded-full border border-gray-100 dark:bg-slate-800 dark:border-slate-700 dark:text-gray-300">
-                              {symptom}
-                            </span>
-                          ))}
-                          {condition.symptoms.length > 3 && (
-                            <span className="text-xs text-gray-400 px-2 py-1">
-                              +{condition.symptoms.length - 3} more
-                            </span>
-                          )}
+                        <div className="mt-4 pt-4 border-t border-gray-100 dark:border-slate-800">
+                          <p className="text-sm text-gray-600 dark:text-gray-400">
+                            {condition.cardDescription}
+                          </p>
                         </div>
                       </CardContent>
                     </Card>

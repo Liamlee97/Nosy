@@ -13,376 +13,451 @@ export interface Condition {
     riskFactors?: string[];
     whenToSeeDoctor?: string[];
     color?: string; // For UI styling in list view
+    cardDescription?: string; // Second-person perspective description for the card
+    sources?: { title: string; url: string }[];
 }
 
 export const conditionsData: Record<number, Condition> = {
     1: {
         id: 1,
-        name: "Anosmia",
-        shortDescription: "Complete loss of smell",
-        fullDescription: "Anosmia is the complete inability to perceive odors. This condition can be temporary or permanent and significantly affects quality of life, safety, and emotional well-being. People with anosmia often experience a reduced sense of taste as well, since smell and taste are closely linked.",
-        prevalence: "1-2% of population",
+        name: "Acquired Anosmia",
+        shortDescription: "Loss of smell due to injury or disease.",
+        fullDescription: "Acquired anosmia is the loss of smell due to injury, virus (like COVID-19), or disease after having had a normal sense of smell.",
+        prevalence: "Varies by cause (e.g., 22% of general population)",
         severity: "High",
-        category: "Complete Loss",
+        category: "Quantitative Disorders",
+        cardDescription: "You used to be able to smell, but now you cannot.",
         symptoms: [
-            "Complete inability to detect any odors",
-            "Significantly reduced taste perception",
-            "Difficulty detecting gas leaks or spoiled food",
-            "Loss of appetite and weight changes",
-            "Depression and social isolation",
-            "Memory issues related to smell-triggered memories"
+            "Sudden or gradual loss of smell",
+            "Flavor loss"
         ],
         causes: [
-            "COVID-19 infection (most common recent cause)",
-            "Head trauma or brain injury",
-            "Nasal polyps or chronic sinusitis",
-            "Upper respiratory infections",
-            "Aging and neurodegenerative diseases",
-            "Congenital conditions (born without smell)",
-            "Medications and chemotherapy",
-            "Exposure to toxic chemicals"
+            "Head injury",
+            "Viral infections",
+            "Neurodegenerative diseases"
         ],
         treatments: [
-            "Smell training with essential oils (rose, lemon, eucalyptus, cloves)",
-            "Treatment of underlying conditions (infections, polyps)",
-            "Corticosteroid nasal sprays or oral medications",
-            "Surgical removal of nasal obstructions",
-            "Alpha-lipoic acid supplementation",
-            "Zinc supplementation (if deficient)",
-            "Counseling and support groups",
-            "Safety adaptations (gas detectors, food dating systems)"
+            "Treating underlying cause",
+            "Smell training"
         ],
-        prognosis: "Recovery varies greatly depending on the underlying cause. Post-viral anosmia (including COVID-19) often shows gradual improvement over 6-12 months. Traumatic anosmia has a lower recovery rate. Early intervention with smell training can improve outcomes.",
+        prognosis: "Depends on the cause.",
+        color: "blue",
         riskFactors: [
-            "Recent viral infections",
-            "History of head trauma",
-            "Chronic nasal/sinus problems",
-            "Advanced age",
-            "Smoking",
-            "Exposure to chemicals"
+            "Head trauma",
+            "Viral exposure",
+            "Neurological conditions"
         ],
         whenToSeeDoctor: [
-            "Sudden loss of smell",
-            "Smell loss lasting more than 2 weeks",
-            "Associated with head injury",
-            "Accompanied by other neurological symptoms",
-            "Affecting quality of life significantly"
+            "After head injury",
+            "Unexplained smell loss"
         ],
-        color: "red"
+        sources: [
+            { title: "National Institute on Deafness and Other Communication Disorders (NIDCD)", url: "https://www.nidcd.nih.gov/health/smell-disorders" },
+            { title: "Mayo Clinic - Anosmia", url: "https://www.mayoclinic.org/symptoms/loss-of-smell/basics/definition/sym-20050804" }
+        ]
     },
     2: {
         id: 2,
-        name: "Parosmia",
-        shortDescription: "Distorted sense of smell",
-        fullDescription: "Parosmia is a condition where familiar smells are perceived as unpleasant, different, or distorted. This often occurs during recovery from smell loss and can be more distressing than complete anosmia. Common triggers include coffee, onions, garlic, and other strong-smelling foods.",
-        prevalence: "Up to 5% post-COVID, 56% of recovering anosmia patients",
-        severity: "Moderate to High",
-        category: "Distorted Perception",
+        name: "Age-Related Smell Decline",
+        shortDescription: "Gradual loss of smell due to aging.",
+        fullDescription: "Age-related smell decline (Presbyosmia) is the gradual loss of smell due to aging, similar to presbyopia for failing eyesight.",
+        prevalence: ">50% of those >65 years",
+        severity: "Mild to Moderate",
+        category: "Quantitative Disorders",
+        cardDescription: "Your sense of smell has gradually faded with age.",
         symptoms: [
-            "Pleasant smells perceived as foul or rotten",
-            "Food aversion and dietary changes",
-            "Nausea when exposed to trigger smells",
-            "Social isolation and avoidance behaviors",
-            "Anxiety around eating and cooking",
-            "Weight loss due to food aversion"
+            "Gradual decline in smell sensitivity",
+            "Difficulty identifying odors"
         ],
         causes: [
-            "Recovery phase from viral infections (COVID-19, cold, flu)",
-            "Head trauma during healing process",
-            "Medication side effects",
-            "Nasal surgery recovery",
-            "Chemotherapy treatment",
-            "Neurological conditions affecting smell processing"
+            "Natural aging process"
         ],
         treatments: [
-            "Smell training with pleasant, familiar scents",
-            "Gradual exposure therapy",
-            "Dietary modifications and food alternatives",
-            "Counseling and cognitive behavioral therapy",
-            "Support groups with other parosmia patients",
-            "Nasal saline rinses",
-            "Time and patience (often improves gradually)",
-            "Avoiding trigger smells when possible"
+            "Flavor enhancement",
+            "Safety measures"
         ],
-        prognosis: "Most cases of parosmia gradually improve over 6-18 months. The condition often represents a positive sign of nerve regeneration during recovery from smell loss. With proper management and support, quality of life can be maintained during recovery.",
+        prognosis: "Progressive.",
+        color: "blue",
         riskFactors: [
-            "Recent smell loss",
-            "COVID-19 infection",
-            "Head injury",
-            "Upper respiratory infections",
-            "Nasal surgery"
+            "Age > 65",
+            "Smoking"
         ],
         whenToSeeDoctor: [
-            "Severe food aversion affecting nutrition",
-            "Significant weight loss",
-            "Depression or anxiety",
-            "Symptoms worsening over time",
-            "Need for coping strategies"
+            "Rapid decline",
+            "Safety concerns (gas/smoke detection)"
         ],
-        color: "orange"
-    },
-    3: {
-        id: 3,
-        name: "Phantosmia",
-        shortDescription: "Phantom smells",
-        fullDescription: "Phantosmia is the perception of smells that aren't actually present in the environment. These phantom smells are often unpleasant and can be persistent or intermittent. The condition can be caused by various factors and may indicate underlying medical issues that require attention.",
-        prevalence: "Less common, affects 1-5% of population",
-        severity: "Moderate",
-        category: "Phantom Perception",
-        symptoms: [
-            "Smelling odors that aren't actually there",
-            "Usually unpleasant smells (burning, chemical, rotten)",
-            "Persistent or intermittent phantom odors",
-            "Difficulty concentrating due to distracting smells",
-            "Anxiety about the phantom smells",
-            "Sleep disturbances"
-        ],
-        causes: [
-            "Nasal infections and sinusitis",
-            "Medications (antibiotics, antihistamines)",
-            "Neurological conditions (epilepsy, migraines)",
-            "Head trauma",
-            "Brain tumors (rare)",
-            "Dental problems",
-            "Hormonal changes",
-            "Psychological stress"
-        ],
-        treatments: [
-            "Treatment of underlying infections",
-            "Medication review and adjustments",
-            "Nasal saline rinses and irrigation",
-            "Topical nasal medications",
-            "Neurological evaluation if needed",
-            "Stress management techniques",
-            "In rare cases, surgical intervention",
-            "Counseling for coping strategies"
-        ],
-        prognosis: "Phantosmia often resolves when the underlying cause is identified and treated. Most cases improve within weeks to months with appropriate treatment. The prognosis is generally good, especially when related to treatable conditions like infections.",
-        riskFactors: [
-            "Recent nasal infections",
-            "Medication use",
-            "History of migraines",
-            "Dental problems",
-            "Stress and anxiety"
-        ],
-        whenToSeeDoctor: [
-            "Persistent phantom smells",
-            "Associated with headaches",
-            "Accompanied by other neurological symptoms",
-            "Affecting daily activities",
-            "Sudden onset without obvious cause"
-        ],
-        color: "purple"
+        sources: [
+            { title: "Cleveland Clinic - Smell Disorders", url: "https://my.clevelandclinic.org/health/diseases/21859-smell-disorders" },
+            { title: "NIH - Aging and Your Senses", url: "https://www.nia.nih.gov/health/sensory-changes/smell-and-taste" }
+        ]
     },
     4: {
         id: 4,
-        name: "Hyposmia",
-        shortDescription: "Reduced sense of smell",
-        fullDescription: "Hyposmia is a decreased ability to smell, where some odors can be detected but not as strongly as normal. This condition is more common than complete smell loss and can significantly impact quality of life, though it's often underrecognized and undertreated.",
-        prevalence: "5-10% of adults, increases with age",
-        severity: "Mild to Moderate",
-        category: "Reduced Perception",
+        name: "Cacosmia",
+        shortDescription: "Perceiving smells as repulsive.",
+        fullDescription: "Cacosmia is a specific type of parosmia or phantosmia where the perceived smell is specifically repulsive (fecal, putrid, or rotting).",
+        prevalence: "Variable (specific type of parosmia)",
+        severity: "High",
+        category: "Qualitative Disorders",
+        cardDescription: "You constantly perceive a repulsive, rotting smell.",
         symptoms: [
-            "Weak or faint smell perception",
-            "Difficulty detecting subtle odors",
-            "Reduced enjoyment of food and drinks",
-            "Delayed detection of hazards (gas, smoke, spoiled food)",
-            "Decreased appetite",
-            "Difficulty with cooking and seasoning"
+            "Constant foul smell",
+            "Nausea"
         ],
         causes: [
-            "Natural aging process",
-            "Allergies and chronic rhinitis",
-            "Chronic sinus infections",
-            "Smoking and tobacco use",
-            "Medications (various types)",
-            "Environmental pollutants",
-            "Mild head trauma",
-            "Hormonal changes"
+            "Infections",
+            "Sinus issues",
+            "Psychological factors"
         ],
         treatments: [
-            "Treatment of allergies and sinus conditions",
-            "Smoking cessation",
-            "Smell training exercises",
-            "Nasal corticosteroid sprays",
-            "Allergy medications",
-            "Environmental modifications",
-            "Regular nasal hygiene",
-            "Lifestyle changes to enhance remaining smell"
+            "Treating underlying infection",
+            "Counseling"
         ],
-        prognosis: "Hyposmia often improves significantly with treatment of underlying conditions. Age-related hyposmia may be slowed with proper care. Early intervention typically leads to better outcomes.",
+        prognosis: "Depends on cause.",
+        color: "orange",
         riskFactors: [
-            "Advanced age",
-            "Smoking history",
-            "Chronic allergies",
-            "Frequent sinus infections",
-            "Environmental exposures"
+            "Chronic sinusitis",
+            "Dental infections"
         ],
         whenToSeeDoctor: [
-            "Gradual worsening of smell",
-            "Associated with chronic congestion",
-            "Affecting quality of life",
-            "Concerns about safety",
-            "Need for treatment optimization"
+            "Persistent foul smell",
+            "Signs of infection"
         ],
-        color: "yellow"
+        sources: [
+            { title: "WebMD - What Is Cacosmia?", url: "https://www.webmd.com/brain/what-is-cacosmia" },
+            { title: "Healthline - Cacosmia", url: "https://www.healthline.com/health/cacosmia" }
+        ]
     },
     5: {
         id: 5,
-        name: "COVID-19 Smell Loss",
-        shortDescription: "Virus-related olfactory dysfunction",
-        fullDescription: "COVID-19 related smell loss is a specific type of olfactory dysfunction caused by SARS-CoV-2 infection. It's characterized by sudden onset, often without nasal congestion, and can range from temporary to long-lasting. This condition has brought unprecedented attention to smell disorders.",
-        prevalence: "60-80% of COVID-19 cases experience some smell loss",
-        severity: "Variable (mild to severe)",
-        category: "Viral-Related",
+        name: "Congenital Anosmia",
+        shortDescription: "Born without a sense of smell.",
+        fullDescription: "Congenital anosmia is a rare condition where individuals are born without the ability to smell, often linked to Kallmann syndrome.",
+        prevalence: "1 in 10,000 births",
+        severity: "High",
+        category: "Quantitative Disorders",
+        cardDescription: "You have never possessed the ability to smell.",
         symptoms: [
-            "Sudden onset of smell loss",
-            "Often accompanied by taste loss",
-            "Usually occurs without nasal congestion",
-            "May progress to parosmia during recovery",
-            "Can be the only symptom of COVID-19",
-            "Varies from partial to complete loss"
+            "Never experienced smell",
+            "Reduced taste perception"
         ],
         causes: [
-            "SARS-CoV-2 virus infection",
-            "Inflammation of olfactory epithelium",
-            "Damage to supporting cells in nasal cavity",
-            "Possible nerve damage",
-            "Immune system response",
-            "Direct viral invasion of olfactory system"
+            "Genetic factors",
+            "Kallmann syndrome",
+            "Developmental abnormalities"
         ],
         treatments: [
-            "Smell training with essential oils",
-            "Anti-inflammatory treatments",
-            "Omega-3 fatty acid supplementation",
-            "Corticosteroid nasal sprays",
-            "Vitamin supplementation (especially vitamin A)",
-            "Time and patience for natural recovery",
-            "Supportive care and monitoring",
-            "Treatment of long COVID symptoms"
+            "Safety education",
+            "Coping strategies"
         ],
-        prognosis: "Most people recover their sense of smell within 6 months, though some may take longer. About 10-15% may have persistent symptoms. Early intervention with smell training may improve recovery rates and speed.",
+        prognosis: "Typically permanent.",
+        color: "blue",
         riskFactors: [
-            "COVID-19 infection",
-            "Certain COVID variants",
-            "Age (higher risk in younger adults)",
-            "Female gender",
-            "Pre-existing nasal conditions"
+            "Family history",
+            "Genetic syndromes"
         ],
         whenToSeeDoctor: [
-            "Smell loss persisting beyond 4 weeks",
-            "Development of parosmia",
-            "Associated with other long COVID symptoms",
-            "Significant impact on quality of life",
-            "Need for smell training guidance"
+            "Child not responding to smells",
+            "Delayed puberty (Kallmann syndrome)"
         ],
-        color: "blue"
+        sources: [
+            { title: "Genetic and Rare Diseases Information Center (GARD)", url: "https://rarediseases.info.nih.gov/diseases/10313/congenital-anosmia" },
+            { title: "Fifth Sense - Congenital Anosmia", url: "https://www.fifthsense.org.uk/congenital-anosmia/" }
+        ]
     },
     6: {
         id: 6,
-        name: "Congenital Anosmia",
-        shortDescription: "Born without sense of smell",
-        fullDescription: "Congenital anosmia is a rare condition where individuals are born without the ability to smell due to developmental abnormalities of the olfactory system. People with this condition have never experienced smell and often develop unique coping strategies throughout their lives.",
-        prevalence: "1 in 10,000 births",
-        severity: "High",
-        category: "Congenital",
+        name: "Euosmia",
+        shortDescription: "Perceiving bad smells as pleasant.",
+        fullDescription: "Euosmia is a rare type of parosmia where a neutral or bad smell is perceived as pleasant (the opposite of cacosmia).",
+        prevalence: "Rare",
+        severity: "Low",
+        category: "Qualitative Disorders",
+        cardDescription: "You perceive pleasant smells that aren't actually there.",
         symptoms: [
-            "Never experienced any sense of smell",
-            "Reduced taste perception (though better adapted than acquired anosmia)",
-            "Heightened other senses as compensation",
-            "Need for safety awareness strategies",
-            "Different relationship with food and memories",
-            "May not realize condition until later in life"
+            "Pleasant olfactory hallucinations"
         ],
         causes: [
-            "Genetic factors and mutations",
-            "Developmental abnormalities of olfactory system",
-            "Kallmann syndrome (associated with hormonal issues)",
-            "Congenital nasal malformations",
-            "Chromosomal abnormalities",
-            "In utero infections or exposures"
+            "Neurological anomalies"
         ],
         treatments: [
-            "Coping strategies and life skills training",
-            "Safety education and home modifications",
-            "Taste enhancement techniques",
-            "Psychological support and counseling",
-            "Connection with support communities",
-            "Regular medical monitoring",
-            "Treatment of associated conditions",
-            "Research participation opportunities"
+            "Observation"
         ],
-        prognosis: "This is typically a permanent condition. Focus is on adaptation, safety, and quality of life. People with congenital anosmia often develop excellent coping skills and can live full, successful lives with proper support and adaptations.",
+        prognosis: "Variable.",
+        color: "orange",
         riskFactors: [
-            "Family history of smell disorders",
-            "Genetic syndromes",
-            "Developmental abnormalities",
-            "Consanguineous parents"
+            "Neurological conditions"
         ],
         whenToSeeDoctor: [
-            "Suspected smell loss in children",
-            "Associated developmental delays",
-            "Family planning considerations",
-            "Need for genetic counseling",
-            "Safety concerns"
+            "New onset hallucinations"
         ],
-        color: "gray"
+        sources: [
+            { title: "ScienceDirect - Olfactory Dysfunction", url: "https://www.sciencedirect.com/topics/medicine-and-dentistry/olfactory-disorder" }
+        ]
     },
     7: {
         id: 7,
-        name: "Age-Related Smell Decline",
-        shortDescription: "Natural aging effects on smell",
-        fullDescription: "Age-related smell decline is a gradual reduction in olfactory function that occurs naturally with aging. This condition affects most people over 65 and can impact nutrition, safety, and quality of life. Understanding and managing this decline is important for healthy aging.",
-        prevalence: "50% over age 65, 75% over age 80",
-        severity: "Mild to Moderate",
-        category: "Age-Related",
+        name: "Hyperosmia",
+        shortDescription: "An abnormally heightened sense of smell.",
+        fullDescription: "Hyperosmia is an abnormally heightened sense of smell. This is rare and often associated with migraines, pregnancy, or certain autoimmune conditions.",
+        prevalence: "Rare (often associated with migraines)",
+        severity: "Variable",
+        category: "Quantitative Disorders",
+        cardDescription: "You have an abnormally heightened and overwhelming sense of smell.",
         symptoms: [
-            "Gradual reduction in smell sensitivity",
-            "Difficulty detecting faint odors",
-            "Problems with food safety detection",
-            "Reduced appetite and enjoyment of food",
-            "Weight loss or poor nutrition",
-            "Increased use of salt and seasonings"
+            "Overwhelming sensitivity to smells",
+            "Nausea from scents",
+            "Headaches"
         ],
         causes: [
-            "Natural aging process of olfactory neurons",
-            "Cumulative damage over lifetime",
-            "Reduced nerve regeneration capacity",
-            "Changes in nasal structure",
-            "Medications commonly used by elderly",
-            "Chronic health conditions",
-            "Environmental exposures over time"
+            "Migraines",
+            "Pregnancy",
+            "Autoimmune conditions",
+            "Lyme disease"
         ],
         treatments: [
-            "Smell training exercises",
-            "Enhanced food flavoring and presentation",
-            "Safety measures (gas detectors, food dating)",
-            "Regular medical check-ups",
-            "Medication review and optimization",
-            "Treatment of contributing conditions",
-            "Nutritional counseling",
-            "Social dining and meal programs"
+            "Trigger avoidance",
+            "Treating underlying condition"
         ],
-        prognosis: "Age-related smell decline is typically progressive but manageable. While complete recovery is unlikely, interventions can slow progression and maintain quality of life. Early recognition and management are key to successful aging.",
+        prognosis: "Often resolves with the underlying cause.",
+        color: "blue",
         riskFactors: [
-            "Advanced age",
-            "Multiple medications",
-            "Chronic health conditions",
-            "History of smoking",
-            "Poor nutrition",
-            "Social isolation"
+            "Migraines",
+            "Pregnancy",
+            "Autoimmune disorders"
         ],
         whenToSeeDoctor: [
-            "Rapid decline in smell",
-            "Safety concerns",
-            "Significant weight loss",
-            "Associated with other symptoms",
-            "Need for management strategies"
+            "Severe headaches",
+            "Nausea/vomiting",
+            "Disruption of daily life"
         ],
-        color: "green"
+        sources: [
+            { title: "Cleveland Clinic - Hyperosmia", url: "https://my.clevelandclinic.org/health/symptoms/hyperosmia" },
+            { title: "WebMD - Hyperosmia", url: "https://www.webmd.com/brain/what-is-hyperosmia" }
+        ]
+    },
+    8: {
+        id: 8,
+        name: "Hyposmia",
+        shortDescription: "A reduced or diminished ability to smell.",
+        fullDescription: "Hyposmia (or Microsmia) is a reduced ability to smell. This is the most common condition and is often age-related or allergy-related.",
+        prevalence: "15-20% of the population",
+        severity: "Mild to Moderate",
+        category: "Quantitative Disorders",
+        cardDescription: "Your sense of smell is reduced, as if the volume has been turned down.",
+        symptoms: [
+            "Faint smell perception",
+            "Reduced flavor intensity"
+        ],
+        causes: [
+            "Aging",
+            "Allergies",
+            "Smoking",
+            "Nasal obstruction"
+        ],
+        treatments: [
+            "Allergy management",
+            "Smoking cessation"
+        ],
+        prognosis: "Often manageable.",
+        color: "blue",
+        riskFactors: [
+            "Aging",
+            "Smoking",
+            "Allergies"
+        ],
+        whenToSeeDoctor: [
+            "Progressive decline",
+            "Impact on quality of life"
+        ],
+        sources: [
+            { title: "Cleveland Clinic - Hyposmia", url: "https://my.clevelandclinic.org/health/diseases/24584-hyposmia" },
+            { title: "NIDCD - Smell Disorders", url: "https://www.nidcd.nih.gov/health/smell-disorders" }
+        ]
+    },
+    9: {
+        id: 9,
+        name: "Olfactory Agnosia",
+        shortDescription: "Inability to identify or name smells.",
+        fullDescription: "Olfactory Agnosia is where the ability to detect a smell is intact, but the ability to identify or name it is lost. It is a common early sign of neurodegenerative diseases.",
+        prevalence: "Associated with neurodegenerative diseases",
+        severity: "Moderate",
+        category: "Central/Processing Disorders",
+        cardDescription: "You can detect smells, but you cannot identify or name them.",
+        symptoms: [
+            "Can smell but can't identify",
+            "Confusion about odors"
+        ],
+        causes: [
+            "Dementia",
+            "Alzheimer's disease",
+            "Brain injury"
+        ],
+        treatments: [
+            "Cognitive training",
+            "Managing underlying condition"
+        ],
+        prognosis: "Progressive if neurodegenerative.",
+        color: "purple",
+        riskFactors: [
+            "Age",
+            "Family history of dementia"
+        ],
+        whenToSeeDoctor: [
+            "Memory loss",
+            "Confusion",
+            "Difficulty naming objects"
+        ],
+        sources: [
+            { title: "PubMed - Olfactory Agnosia", url: "https://pubmed.ncbi.nlm.nih.gov/" }
+        ]
+    },
+    10: {
+        id: 10,
+        name: "Osmophobia",
+        shortDescription: "Fear or aversion to smells.",
+        fullDescription: "Osmophobia is a psychological fear, aversion, or hypersensitivity to smells. While similar to hyperosmia, this is often an emotional or phobic reaction (common in migraine sufferers).",
+        prevalence: "~25-50% of migraine sufferers",
+        severity: "Moderate",
+        category: "Central/Processing Disorders",
+        cardDescription: "You have a strong fear or aversion to certain smells.",
+        symptoms: [
+            "Anxiety around smells",
+            "Avoidance behavior",
+            "Nausea"
+        ],
+        causes: [
+            "Migraines",
+            "Psychological phobias"
+        ],
+        treatments: [
+            "Desensitization",
+            "Migraine management"
+        ],
+        prognosis: "Manageable.",
+        color: "purple",
+        riskFactors: [
+            "Migraines",
+            "Anxiety disorders"
+        ],
+        whenToSeeDoctor: [
+            "Severe anxiety",
+            "Impact on daily functioning"
+        ],
+        sources: [
+            { title: "American Migraine Foundation - Osmophobia", url: "https://americanmigrainefoundation.org/" },
+            { title: "National Library of Medicine - Osmophobia", url: "https://www.ncbi.nlm.nih.gov/" }
+        ]
+    },
+    11: {
+        id: 11,
+        name: "Parosmia",
+        shortDescription: "A distortion of a real smell.",
+        fullDescription: "Parosmia is a distortion of a real smell. You smell a rose, but your brain registers it as garbage or smoke. This is common during recovery from viral infections.",
+        prevalence: "10-60% of post-viral smell loss cases",
+        severity: "Moderate to High",
+        category: "Qualitative Disorders",
+        cardDescription: "Familiar smells are distorted and often unpleasant to you.",
+        symptoms: [
+            "Distorted smells (often unpleasant)",
+            "Food aversion"
+        ],
+        causes: [
+            "Post-viral recovery",
+            "Head trauma"
+        ],
+        treatments: [
+            "Smell training",
+            "Time"
+        ],
+        prognosis: "Often improves over time.",
+        color: "orange",
+        riskFactors: [
+            "Recent viral infection",
+            "Recovery from anosmia"
+        ],
+        whenToSeeDoctor: [
+            "Severe food aversion",
+            "Weight loss",
+            "Depression"
+        ],
+        sources: [
+            { title: "Fifth Sense - Parosmia", url: "https://www.fifthsense.org.uk/parosmia-and-phantosmia/" },
+            { title: "WebMD - Parosmia", url: "https://www.webmd.com/brain/what-is-parosmia" }
+        ]
+    },
+    12: {
+        id: 12,
+        name: "Phantosmia",
+        shortDescription: "An olfactory hallucination.",
+        fullDescription: "Phantosmia is an olfactory hallucination. You smell something (often smoke, chemicals, or rot) when there is absolutely no odor source present.",
+        prevalence: "0.8-6% of adults",
+        severity: "Moderate",
+        category: "Qualitative Disorders",
+        cardDescription: "You smell odors, like smoke, that are not present.",
+        symptoms: [
+            "Smelling odors that aren't there",
+            "Persistent unpleasant smells"
+        ],
+        causes: [
+            "Nasal infections",
+            "Neurological issues",
+            "Head trauma"
+        ],
+        treatments: [
+            "Saline rinses",
+            "Medication",
+            "Surgery (rare)"
+        ],
+        prognosis: "Can be transient or persistent.",
+        color: "orange",
+        riskFactors: [
+            "Sinus infections",
+            "Head injury",
+            "Epilepsy (rare)"
+        ],
+        whenToSeeDoctor: [
+            "Persistent phantom smells",
+            "Associated with seizures or headaches"
+        ],
+        sources: [
+            { title: "Mayo Clinic - Phantosmia", url: "https://www.mayoclinic.org/diseases-conditions/temporal-lobe-seizure/expert-answers/phantosmia/faq-20058131" },
+            { title: "WebMD - Phantosmia", url: "https://www.webmd.com/brain/what-is-phantosmia" }
+        ]
+    },
+    13: {
+        id: 13,
+        name: "Specific Anosmia",
+        shortDescription: "Inability to smell one specific odor.",
+        fullDescription: "Specific Anosmia is the inability to smell one specific type of odor (e.g., musk or sweat) while smelling others normally. This is usually genetic.",
+        prevalence: "Varies by odorant (e.g., 50% for androstenone)",
+        severity: "Mild",
+        category: "Quantitative Disorders",
+        cardDescription: "You cannot smell specific odors, like musk, but can smell others.",
+        symptoms: [
+            "Inability to detect specific scents (e.g., musk, androstenone)"
+        ],
+        causes: [
+            "Genetic variation in olfactory receptors"
+        ],
+        treatments: [
+            "None needed"
+        ],
+        prognosis: "Permanent but harmless.",
+        color: "blue",
+        riskFactors: [
+            "Genetics"
+        ],
+        whenToSeeDoctor: [
+            "Generally not required"
+        ],
+        sources: [
+            { title: "Monell Chemical Senses Center", url: "https://monell.org/" },
+            { title: "PubMed - Specific Anosmia", url: "https://pubmed.ncbi.nlm.nih.gov/" }
+        ]
     }
 };
 
-export const getAllConditions = () => Object.values(conditionsData);
+export const getAllConditions = () => Object.values(conditionsData).sort((a, b) => a.name.localeCompare(b.name));
 
 export const getConditionById = (id: number) => conditionsData[id];

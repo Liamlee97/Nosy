@@ -26,7 +26,7 @@ import Footer from '@/components/Footer';
 
 import { getAllArticles } from '@/data/articles/index';
 
-const categories = ["All", "Fascinating History", "Clinical Trial Explained", "Basic Science Explained"];
+const categories = ["All", "Fascinating History", "Clinical Trials Explained", "Research Papers Explained"];
 
 export default function AllArticlesPage() {
   const [allArticles, setAllArticles] = useState(getAllArticles());
