@@ -2,7 +2,7 @@ import { Article } from './types';
 
 export const chemistryMeetsPerception: Article = {
     id: "chemistry-meets-perception",
-    title: "Does Mint Have a Shape? The Geometric Mystery of Smell",
+    title: "Does Mint Have a Shape🔶? The Geometric Mystery of Smell",
     excerpt: "What makes mint smell minty or musk smell musky? A 1960s theory proposed that it’s all about molecular shape — and it shaped how we thought about smell for decades.",
     category: "Fascinating History",
     readingTime: 3,

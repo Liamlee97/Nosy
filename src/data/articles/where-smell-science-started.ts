@@ -2,7 +2,7 @@ import { Article } from './types';
 
 export const whereSmellScienceStarted: Article = {
     id: "where-smell-science-started",
-    title: "Smell Science: Where Did It All Start?",
+    title: "Smell Science: Where Did It All Start🕒?",
     excerpt: "From ancient anatomy to brain mapping and the first smell tests, take a quick tour through the curious origins of olfactory science.",
     category: "Fascinating History",
     readingTime: 3,
