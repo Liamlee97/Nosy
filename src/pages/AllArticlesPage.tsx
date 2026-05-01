@@ -27,7 +27,7 @@ import { ClinicalTrialsTable } from '@/components/ClinicalTrialsTable';
 
 import { getAllArticles } from '@/data/articles/index';
 
-const categories = ["All", "Fascinating History & Facts", "Clinical Trials Explained", "Basic Science Explained"];
+const categories = ["All", "Fascinating History & Facts", "Clinical Trials Explained"];
 
 export default function AllArticlesPage() {
   const [allArticles, setAllArticles] = useState(getAllArticles());
@@ -84,7 +84,7 @@ export default function AllArticlesPage() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-slate-950">
       <SEO
-        title="Research News & Articles - Nosy"
+        title="Article Collection - Nosy"
         description="Browse the latest olfactory research and news translated into plain language."
       />
       <Header />
@@ -96,7 +96,7 @@ export default function AllArticlesPage() {
             All Articles
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto dark:text-gray-400">
-            Explore our complete collection of research news, condition guides, and treatment information
+            Explore our complete collection of articles, condition guides, and treatment information
           </p>
         </div>
 

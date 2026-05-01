@@ -48,14 +48,14 @@ export default function AboutPage() {
           <CardHeader>
             <CardTitle className="flex items-center text-2xl dark:text-white">
               <Target className="w-6 h-6 mr-3 text-blue-600" />
-              Our Mission
+              My Mission
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
             <p className="text-lg text-gray-700 leading-relaxed dark:text-gray-300">
               Nosy exists to translate complex olfactory research into accessible, plain-language information
-              for the global smell loss community. We believe that everyone deserves to understand the science
-              behind their condition and the latest treatment advances.
+              for the global smell loss community. I believe that some of you will find it useful to understand the history, science, and the latest treatments
+              for smell loss.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -105,7 +105,7 @@ export default function AboutPage() {
           <CardHeader>
             <CardTitle className="flex items-center text-2xl dark:text-white">
               <User className="w-6 h-6 mr-3 text-green-600" />
-              Meet the Creator
+              About Me
             </CardTitle>
             <CardDescription className="dark:text-gray-400">
               Learn about the person behind Nosy

@@ -50,13 +50,7 @@ export const articlesData: Record<string, Article> = {
     "monell-center": monellCenter,
     "cloquet-osphresiologie": cloquetOsphresiologie,
     "helen-keller-smell": helenKellerSmell,
-    "mombaerts-glomerular-map": mombaertsGlomerularMap,
-    "smell-sleep-circadian": smellSleepCircadian,
-    "genetic-variation-smell": geneticVariationSmell,
-    "combinatorial-coding": combinatorialCoding,
-    "trigeminal-chemesthesis": trigeminalChemesthesis,
-    "retronasal-olfaction": retronasalOlfaction,
-    "mucus-obps": mucusObps
+    "mombaerts-glomerular-map": mombaertsGlomerularMap
 };
 
 export const getAllArticles = () => Object.values(articlesData);

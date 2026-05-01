@@ -71,7 +71,7 @@ export default function HomePage() {
                 About Smell Science
               </h2>
               <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto dark:text-gray-300">
-                Research news and insights in plain language for the global smell loss community.
+                Article Collection and insights in plain language for the global smell loss community.
               </p>
             </motion.div>
 
@@ -117,7 +117,7 @@ export default function HomePage() {
         <section id="research" className="py-16 px-4 bg-white dark:bg-slate-950">
           <div className="container mx-auto max-w-6xl">
             <div className="text-center mb-12">
-              <h3 className="text-3xl font-bold text-gray-900 mb-4 dark:text-white">Latest Research News</h3>
+              <h3 className="text-3xl font-bold text-gray-900 mb-4 dark:text-white">Latest Article Collection</h3>
               <p className="text-gray-600 max-w-2xl mx-auto dark:text-gray-400">
                 Stay updated with the latest olfactory research translated into accessible language
               </p>

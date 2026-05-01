@@ -17,9 +17,9 @@ const ConditionDetailPage = lazy(() => import('./pages/ConditionDetailPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
 const Science101Page = lazy(() => import('./pages/Science101Page'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
-const CommunityPage = lazy(() => import('./pages/CommunityPage'));
 const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage'));
 const TermsOfUsePage = lazy(() => import('./pages/TermsOfUsePage'));
+const InteractiveSciencePage = lazy(() => import('./pages/InteractiveSciencePage'));
 
 const queryClient = new QueryClient();
 
@@ -40,9 +40,9 @@ const App = () => (
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/science101" element={<Science101Page />} />
                 <Route path="/contact" element={<ContactPage />} />
-                <Route path="/community" element={<CommunityPage />} />
                 <Route path="/privacy" element={<PrivacyPolicyPage />} />
                 <Route path="/terms" element={<TermsOfUsePage />} />
+                <Route path="/interactive-science" element={<InteractiveSciencePage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>

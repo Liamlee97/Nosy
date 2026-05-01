@@ -57,7 +57,7 @@ export default function AllConditionsPage() {
     <div className="min-h-screen bg-gray-50 dark:bg-slate-950">
       <SEO
         title="All Conditions - Nosy"
-        description="Browse our comprehensive guide to olfactory conditions, including Anosmia, Parosmia, and more."
+        description="Browse our overview of olfactory conditions, including Anosmia, Parosmia, and more."
       />
 
       {/* Header */}
@@ -70,7 +70,7 @@ export default function AllConditionsPage() {
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl font-bold text-gray-900 mb-4 dark:text-white">Olfactory Conditions</h1>
             <p className="text-xl text-gray-600 mb-8 dark:text-gray-400">
-              A comprehensive guide to understanding different types of smell and taste disorders.
+              An overview of the different types of smell and taste disorders.
             </p>
 
             {/* Search Bar */}
