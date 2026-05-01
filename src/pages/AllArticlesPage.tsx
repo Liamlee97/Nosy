@@ -27,14 +27,18 @@ import { ClinicalTrialsTable } from '@/components/ClinicalTrialsTable';
 
 import { getAllArticles } from '@/data/articles/index';
 
-const categories = ["All", "Fascinating History", "Clinical Trials Explained", "Basic Science Explained"];
+const categories = ["All", "Fascinating History & Facts", "Clinical Trials Explained", "Basic Science Explained"];
 
 export default function AllArticlesPage() {
   const [allArticles, setAllArticles] = useState(getAllArticles());
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [sortOrder, setSortOrder] = useState<'newest' | 'oldest'>('newest');
-  const [filteredArticles, setFilteredArticles] = useState(getAllArticles());
+  const [filteredArticles, setFilteredArticles] = useState(() => {
+    const articles = [...getAllArticles()];
+    articles.sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime());
+    return articles;
+  });
 
   // Removed useEffect fetch since we now have synchronous data
 
