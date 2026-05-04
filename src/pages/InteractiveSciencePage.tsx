@@ -1,36 +1,10 @@
-import React, { useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
-import OECrossSection from '@/components/interactive-science/OECrossSection';
-import CellInfoPanel from '@/components/interactive-science/CellInfoPanel';
-import PerturbationView from '@/components/interactive-science/PerturbationView';
 import { motion } from 'framer-motion';
-import { Layers, Microscope, FlaskConical } from 'lucide-react';
+import { Construction, FlaskConical, Microscope, Layers } from 'lucide-react';
 
 export default function InteractiveSciencePage() {
-  const [selectedCellId, setSelectedCellId] = useState<string | null>(null);
-  const [hoveredCellId, setHoveredCellId] = useState<string | null>(null);
-  const [activePerturbationId, setActivePerturbationId] = useState<string | null>(null);
-
-  const handleCellSelect = (cellId: string) => {
-    setSelectedCellId(cellId);
-    setActivePerturbationId(null);
-  };
-
-  const handleCellDeselect = () => {
-    setSelectedCellId(null);
-    setActivePerturbationId(null);
-  };
-
-  const handleRunPerturbation = (perturbationId: string) => {
-    setActivePerturbationId(perturbationId);
-  };
-
-  const handleClosePerturbation = () => {
-    setActivePerturbationId(null);
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950 flex flex-col">
       <SEO
@@ -39,95 +13,63 @@ export default function InteractiveSciencePage() {
       />
       <Header />
 
-      <main className="flex-grow">
-        {/* Hero Section */}
-        <section className="py-12 md:py-16 px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-                Olfactory Epithelium Explorer
-              </h1>
-              <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8">
-                Dive into the tissue where smell begins. Hover over the cross-section to learn about each cell type,
-                then run real experiments to see how the epithelium responds to perturbations.
-              </p>
-            </motion.div>
-
-            {/* Quick-guide pills */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="flex flex-wrap justify-center gap-3 mb-10"
-            >
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-sm font-medium">
-                <Layers className="w-4 h-4" />
-                Explore Layers
-              </div>
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-sm font-medium">
-                <Microscope className="w-4 h-4" />
-                View Cell Details
-              </div>
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 text-sm font-medium">
-                <FlaskConical className="w-4 h-4" />
-                Run Experiments
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Interactive Diagram Section */}
-        <section className="px-4 pb-8">
+      <main className="flex-grow flex items-center justify-center px-4 py-20">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="max-w-xl w-full text-center"
+        >
+          {/* Animated construction icon */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            animate={{ rotate: [0, -8, 8, -8, 0] }}
+            transition={{ duration: 2.5, repeat: Infinity, repeatDelay: 3 }}
+            className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-amber-100 dark:bg-amber-900/30 mb-8"
           >
-            <OECrossSection
-              selectedCellId={selectedCellId}
-              hoveredCellId={hoveredCellId}
-              onCellSelect={handleCellSelect}
-              onCellHover={setHoveredCellId}
-            />
+            <Construction className="w-10 h-10 text-amber-600 dark:text-amber-400" />
           </motion.div>
 
-          {/* Cell Info Panel */}
-          <CellInfoPanel
-            selectedCellId={selectedCellId}
-            onClose={handleCellDeselect}
-            onRunPerturbation={handleRunPerturbation}
-          />
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+            Under Construction
+          </h1>
+          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-md mx-auto mb-10">
+            We're building something exciting — an interactive exploration of the olfactory epithelium
+            with real experiments you can run. Check back soon!
+          </p>
 
-          {/* Perturbation View */}
-          <PerturbationView
-            perturbationId={activePerturbationId}
-            onClose={handleClosePerturbation}
-          />
-        </section>
-
-        {/* Bottom info section */}
-        <section className="px-4 pb-16">
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="text-center p-6 rounded-xl bg-white/60 dark:bg-slate-800/40 backdrop-blur-sm border border-gray-200 dark:border-slate-700"
-            >
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                <strong className="text-gray-700 dark:text-gray-300">Prototype v1</strong> — This interactive module currently features the olfactory epithelium cross-section
-                with two perturbation experiments. More cell types, experiments, and interactive modules are being developed.
-              </p>
-            </motion.div>
+          {/* Feature preview pills */}
+          <div className="flex flex-wrap justify-center gap-3 mb-10">
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-green-100/60 dark:bg-green-900/20 text-green-600 dark:text-green-500 text-sm font-medium opacity-60">
+              <Layers className="w-4 h-4" />
+              Explore Layers
+            </div>
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100/60 dark:bg-blue-900/20 text-blue-600 dark:text-blue-500 text-sm font-medium opacity-60">
+              <Microscope className="w-4 h-4" />
+              View Cell Details
+            </div>
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-purple-100/60 dark:bg-purple-900/20 text-purple-600 dark:text-purple-500 text-sm font-medium opacity-60">
+              <FlaskConical className="w-4 h-4" />
+              Run Experiments
+            </div>
           </div>
-        </section>
+
+          {/* Pulsing progress bar */}
+          <div className="max-w-xs mx-auto">
+            <div className="h-1.5 rounded-full bg-gray-200 dark:bg-slate-700 overflow-hidden">
+              <motion.div
+                className="h-full rounded-full bg-gradient-to-r from-amber-400 via-orange-400 to-amber-400"
+                initial={{ x: '-100%' }}
+                animate={{ x: '100%' }}
+                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                style={{ width: '60%' }}
+              />
+            </div>
+          </div>
+        </motion.div>
       </main>
 
       <Footer />
     </div>
   );
 }
+
