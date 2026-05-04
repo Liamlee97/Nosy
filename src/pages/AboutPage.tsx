@@ -145,7 +145,7 @@ export default function AboutPage() {
                     We are living in exciting times as the field of olfaction is growing, but there is still a massive amount left to discover. I'm eager to share this evolving knowledge with the global olfactory disorder community.
                   </p>
                   <p className="text-gray-700 leading-relaxed mb-4 dark:text-gray-300">
-                    My hope is that at least one person finds this website helpful or enjoyable (or both!). For me, that is absolutely enough.
+                    My hope is that at least one person finds this website helpful or enjoyable (or both!).
                   </p>
                 </div>
 

@@ -1,3 +1,14 @@
+# How to run once git copied
+cd workspace/Nosy
+npm install (once only)
+npm run dev
+
+# How to update
+git status
+git add .
+git commit -m "Update"
+git push
+
 # Shadcn-UI Template Usage Instructions
 
 ## technology stack
