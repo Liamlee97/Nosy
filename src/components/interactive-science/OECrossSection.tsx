@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { cellTypes, type CellType } from '@/data/oeData';
+import { cellTypes } from '@/data/oeData';
 
 interface OECrossSectionProps {
   selectedCellId: string | null;
@@ -9,10 +9,9 @@ interface OECrossSectionProps {
   onCellHover: (cellId: string | null) => void;
 }
 
-// Data structures for individual cell instances
 interface CellInstance {
-  id: string;      // Unique instance ID (e.g., 'gbc-3')
-  typeId: string;  // Data model ID (e.g., 'gbc')
+  id: string;
+  typeId: string;
   element: React.ReactNode;
 }
 
@@ -23,9 +22,6 @@ export default function OECrossSection({
   onCellHover,
 }: OECrossSectionProps) {
 
-  // We map the instance ID to the type ID for hovering logic.
-  // When a user hovers an instance, we tell the parent they are hovering the TYPE.
-  // We'll track the currently hovered instance locally to highlight just that one cell.
   const [hoveredInstanceId, setHoveredInstanceId] = useState<string | null>(null);
 
   const handleMouseEnter = (instanceId: string, typeId: string) => {
@@ -42,184 +38,199 @@ export default function OECrossSection({
     onCellSelect(typeId);
   };
 
-  // Helper to get colors based on state
-  const getStyle = (instanceId: string, typeId: string) => {
+  const getStyle = (instanceId: string, typeId: string, isLine = false) => {
     const isHovered = hoveredInstanceId === instanceId;
-    const isTypeHovered = hoveredCellId === typeId; // Another instance of same type is hovered
+    const isTypeHovered = hoveredCellId === typeId;
     const isSelected = selectedCellId === typeId;
     const cellDef = cellTypes.find(c => c.id === typeId)!;
 
-    let fill = cellDef.color;
+    let fill = isLine ? 'none' : cellDef.color;
     let stroke = cellDef.darkColor;
-    let strokeWidth = 2;
+    let strokeWidth = isLine ? 3 : 1.5;
     let opacity = 1;
+    let filter = '';
 
     if (isSelected) {
-      strokeWidth = 4;
-      stroke = '#2563eb'; // blue-600 outline for selected type
-      if (isHovered) fill = cellDef.hoverColor;
+      strokeWidth += 2;
+      stroke = '#1e293b'; // slate-800 outline for selected type
+      if (!isLine) fill = cellDef.hoverColor;
+      filter = 'drop-shadow(0 0 8px rgba(255,255,255,0.8))';
     } else if (isHovered) {
-      fill = cellDef.hoverColor;
-      strokeWidth = 3;
+      if (!isLine) fill = cellDef.hoverColor;
+      strokeWidth += 1;
     } else if (isTypeHovered) {
-      // Highlight other cells of the same type slightly
-      fill = cellDef.hoverColor;
-      opacity = 0.9;
+      if (!isLine) fill = cellDef.hoverColor;
+      opacity = 0.95;
     } else if (hoveredCellId || selectedCellId) {
-      // Dim cells of unselected/unhovered types
       opacity = 0.4;
     }
 
-    return { fill, stroke, strokeWidth, opacity, transition: 'all 0.2s ease' };
+    return { fill, stroke, strokeWidth, opacity, filter, transition: 'all 0.2s ease-out' };
   };
 
-  // --- CELL GENERATION ---
+  // --- 2.5D OVERLAPPING LAYOUT GENERATION ---
+  const zLayers: { [key: string]: CellInstance[] } = {
+    sus: [],
+    bowman: [],
+    middle: [], // mosn, iosn, ionocyte/tuft
+    gbc: [],
+    hbc: [],
+    axons: []
+  };
 
-  const instances: CellInstance[] = [];
+  const pushCell = (layer: string, typeId: string, id: string, element: React.ReactNode, isLine = false) => {
+    zLayers[layer].push({
+      id,
+      typeId,
+      element: (
+        <motion.g
+          key={id}
+          style={{ cursor: 'pointer' }}
+          animate={getStyle(id, typeId, isLine)}
+          initial={false}
+          onMouseEnter={() => handleMouseEnter(id, typeId)}
+          onMouseLeave={handleMouseLeave}
+          onClick={() => handleClick(typeId)}
+        >
+          {element}
+        </motion.g>
+      )
+    });
+  };
 
-  // 1. Bowman's Gland Duct (Left side)
-  // A tube made of a series of small cells
-  const ductCells = [];
-  for (let i = 0; i < 15; i++) {
-    ductCells.push(
-      <rect key={`duct-${i}`} x={120} y={40 + i * 24} width={30} height={24} rx={4} />
-    );
-    ductCells.push(
-      <rect key={`duct-r-${i}`} x={150} y={40 + i * 24} width={30} height={24} rx={4} />
-    );
-  }
-  instances.push({
-    id: 'bowman-1',
-    typeId: 'bowman',
-    element: (
+  // 1. Sustentacular Cells (Background Layer)
+  // Spanning from x=120 to x=1000. y=60 to y=450.
+  const susCount = 8;
+  const susWidth = (1000 - 120) / susCount;
+  for (let i = 0; i < susCount; i++) {
+    const xL = 120 + i * susWidth;
+    const xR = 120 + (i + 1) * susWidth;
+    const xM = (xL + xR) / 2;
+    // Tapering shape: fat at top, narrow at bottom
+    const d = `M ${xL},60 Q ${xL+10},250 ${xM-10},450 L ${xM+10},450 Q ${xR-10},250 ${xR},60 Z`;
+    pushCell('sus', 'sustentacular', `sus-${i}`, (
       <g>
-        <path d="M 120,40 L 120,400 L 180,400 L 180,40 Z" fill="none" />
-        {ductCells}
-      </g>
-    )
-  });
-
-  // 2. Sustentacular Cells (Spanning top to bottom)
-  const susPositions = [220, 310, 400, 520, 610, 700, 820, 910];
-  susPositions.forEach((x, i) => {
-    instances.push({
-      id: `sus-${i}`,
-      typeId: 'sustentacular',
-      element: (
-        <path d={`M ${x-15},40 C ${x-5},150 ${x-20},300 ${x-5},390 L ${x+15},390 C ${x+30},300 ${x+10},150 ${x+25},40 Z`} />
-      )
-    });
-  });
-
-  // 3. Horizontal Basal Cells (HBCs) - Exactly 5
-  // Placed along the basal lamina (y=390)
-  const hbcPositions = [260, 450, 650, 850, 750];
-  hbcPositions.forEach((x, i) => {
-    instances.push({
-      id: `hbc-${i}`,
-      typeId: 'hbc',
-      element: <ellipse cx={x} cy={385} rx={35} ry={12} />
-    });
-  });
-
-  // 4. Globose Basal Cells (GBCs) - Exactly 10
-  // Placed just above HBCs
-  const gbcPositions = [
-    {x: 220, y: 360}, {x: 280, y: 350}, {x: 320, y: 365},
-    {x: 410, y: 355}, {x: 480, y: 360},
-    {x: 600, y: 360}, {x: 680, y: 350}, {x: 720, y: 365},
-    {x: 820, y: 350}, {x: 880, y: 360}
-  ];
-  gbcPositions.forEach((pos, i) => {
-    instances.push({
-      id: `gbc-${i}`,
-      typeId: 'gbc',
-      element: <circle cx={pos.x} cy={pos.y} r={16} />
-    });
-  });
-
-  // 5. Mature OSNs (mOSNs)
-  // Bipolar neurons with cell body high up, dendrite to surface, axon to base
-  const mosnPositions = [
-    {x: 260, y: 220}, {x: 350, y: 180}, {x: 460, y: 240},
-    {x: 560, y: 190}, {x: 650, y: 230}, {x: 760, y: 170}, {x: 860, y: 210}
-  ];
-  mosnPositions.forEach((pos, i) => {
-    const cx = pos.x;
-    const cy = pos.y;
-    instances.push({
-      id: `mosn-${i}`,
-      typeId: 'mosn',
-      element: (
-        <g>
-          {/* Axon */}
-          <path d={`M ${cx},${cy+20} C ${cx+10},300 ${cx-10},350 ${cx},410`} fill="none" />
-          {/* Dendrite */}
-          <path d={`M ${cx},${cy-20} C ${cx-5},120 ${cx+5},80 ${cx},40`} fill="none" strokeWidth={6} />
-          {/* Cell Body */}
-          <ellipse cx={cx} cy={cy} rx={18} ry={26} />
-          {/* Olfactory Knob & Cilia */}
-          <circle cx={cx} cy={35} r={6} />
-          <path d={`M ${cx},30 Q ${cx-15},15 ${cx-20},5 M ${cx},30 Q ${cx},15 ${cx+5},5 M ${cx},30 Q ${cx+15},15 ${cx+20},5 M ${cx},30 Q ${cx-10},10 ${cx-30},15 M ${cx},30 Q ${cx+10},10 ${cx+30},15`} fill="none" strokeWidth={2} />
-        </g>
-      )
-    });
-  });
-
-  // 6. Immature OSNs (iOSNs)
-  // Cell bodies lower than mOSNs, axon extending down, dendrite not reaching surface
-  const iosnPositions = [
-    {x: 300, y: 280}, {x: 400, y: 290}, {x: 510, y: 270},
-    {x: 700, y: 280}, {x: 800, y: 290}
-  ];
-  iosnPositions.forEach((pos, i) => {
-    const cx = pos.x;
-    const cy = pos.y;
-    instances.push({
-      id: `iosn-${i}`,
-      typeId: 'iosn',
-      element: (
-        <g>
-          {/* Axon */}
-          <path d={`M ${cx},${cy+20} C ${cx-5},330 ${cx+5},370 ${cx},410`} fill="none" />
-          {/* Short Dendrite */}
-          <path d={`M ${cx},${cy-20} L ${cx},${cy-80}`} fill="none" strokeWidth={4} />
-          {/* Cell Body */}
-          <ellipse cx={cx} cy={cy} rx={16} ry={22} />
-        </g>
-      )
-    });
-  });
-
-  // 7. Ionocyte
-  instances.push({
-    id: 'ionocyte-1',
-    typeId: 'ionocyte',
-    element: (
-      <g>
-        <path d="M 430,40 C 420,100 440,150 430,200 C 445,150 445,100 430,40 Z" />
+        <path d={d} strokeLinejoin="round" />
+        <ellipse cx={xM} cy={120} rx={12} ry={25} fill="currentColor" opacity={0.4} stroke="none" />
         {/* Microvilli */}
-        <path d="M 425,40 L 425,30 M 430,40 L 430,28 M 435,40 L 435,32" fill="none" strokeWidth={2} />
+        {Array.from({length: 8}).map((_, j) => (
+          <path key={j} d={`M ${xL + 10 + j * (susWidth-20)/7},60 L ${xL + 10 + j * (susWidth-20)/7 + (Math.random()*10-5)},45`} fill="none" strokeWidth={1} stroke="currentColor" opacity={0.6}/>
+        ))}
       </g>
-    )
+    ));
+  }
+
+  // 2. Bowman's Gland & Duct (Left side)
+  pushCell('bowman', 'bowman', 'bowman-1', (
+    <g>
+      {/* Deep looping gland path */}
+      <path d="M 40,60 C 50,200 40,400 30,500 C 20,600 80,620 100,550 C 120,480 100,300 90,60 Z" strokeLinejoin="round" />
+      {/* Gland details */}
+      <path d="M 60,60 C 70,200 65,400 55,490 C 50,560 80,570 85,550 C 100,480 80,300 75,60" fill="none" stroke="currentColor" strokeWidth={2} opacity={0.4} />
+      {Array.from({length: 20}).map((_, j) => (
+        <circle key={j} cx={50 + Math.sin(j)*10} cy={80 + j*25} r={4} fill="currentColor" opacity={0.5} stroke="none" />
+      ))}
+    </g>
+  ));
+
+  // 3. Middle Layer (Microvillar, mOSN, iOSN)
+  // Microvillar (Ionocyte/Tuft)
+  const mvPositions = [350, 750];
+  mvPositions.forEach((x, i) => {
+    const d = `M ${x-25},60 C ${x-15},180 ${x-10},280 ${x},320 C ${x+10},280 ${x+15},180 ${x+25},60 Z`;
+    pushCell('middle', i === 0 ? 'ionocyte' : 'tuft', `mv-${i}`, (
+      <g>
+        <path d={d} />
+        <ellipse cx={x} cy={160} rx={10} ry={16} fill="currentColor" opacity={0.4} stroke="none" />
+        {/* Microvilli Brush border */}
+        {Array.from({length: 12}).map((_, j) => (
+          <path key={j} d={`M ${x-20 + j*4},60 L ${x-20 + j*4},40`} fill="none" stroke="currentColor" strokeWidth={1.5} />
+        ))}
+      </g>
+    ));
   });
 
-  // 8. Tuft Cell
-  instances.push({
-    id: 'tuft-1',
-    typeId: 'tuft',
-    element: (
+  // mOSNs (Mature) - Higher cell bodies
+  const mosnPositions = [220, 280, 420, 520, 620, 820, 920];
+  mosnPositions.forEach((x, i) => {
+    const cy = 250 + (i % 2) * 20; // Staggered cell bodies
+    const dBody = `M ${x},${cy-30} C ${x+25},${cy-10} ${x+25},${cy+20} ${x},${cy+40} C ${x-25},${cy+20} ${x-25},${cy-10} ${x},${cy-30} Z`;
+    const dDendrite = `M ${x},${cy-30} C ${x-15},150 ${x+15},100 ${x},60`;
+    pushCell('middle', 'mosn', `mosn-${i}`, (
       <g>
-        <path d="M 670,40 C 660,120 685,180 670,240 C 685,180 680,120 670,40 Z" />
-        {/* Tuft */}
-        <path d="M 665,40 L 660,25 M 670,40 L 670,20 M 675,40 L 680,25" fill="none" strokeWidth={2} />
+        <path d={dBody} />
+        <path d={dDendrite} fill="none" stroke="currentColor" strokeWidth={5} />
+        <ellipse cx={x} cy={cy+5} rx={12} ry={15} fill="currentColor" opacity={0.4} stroke="none" />
+        {/* Olfactory Knob & Cilia */}
+        <circle cx={x} cy={55} r={6} fill="currentColor" stroke="none" />
+        <path d={`M ${x},55 C ${x-20},40 ${x-30},30 ${x-40},10 M ${x},55 C ${x-10},30 ${x},30 ${x},10 M ${x},55 C ${x+20},40 ${x+30},30 ${x+40},10`} fill="none" stroke="currentColor" strokeWidth={1.5} />
       </g>
-    )
+    ));
+    
+    // Axon tracked in separate layer so it renders in front of GBCs
+    pushCell('axons', 'mosn', `mosn-axon-${i}`, (
+      <path d={`M ${x},${cy+40} C ${x-10},400 ${650},450 ${650},580`} />
+    ), true);
   });
+
+  // iOSNs (Immature) - Lower cell bodies, short dendrites
+  const iosnPositions = [250, 320, 470, 570, 680, 870];
+  iosnPositions.forEach((x, i) => {
+    const cy = 340 + (i % 2) * 15;
+    const dBody = `M ${x},${cy-20} C ${x+20},${cy-5} ${x+20},${cy+15} ${x},${cy+30} C ${x-20},${cy+15} ${x-20},${cy-5} ${x},${cy-20} Z`;
+    const dDendrite = `M ${x},${cy-20} C ${x+10},${cy-60} ${x-10},${cy-100} ${x},${cy-140}`;
+    pushCell('middle', 'iosn', `iosn-${i}`, (
+      <g>
+        <path d={dBody} />
+        <path d={dDendrite} fill="none" stroke="currentColor" strokeWidth={4} strokeLinecap="round" />
+        <ellipse cx={x} cy={cy+5} rx={10} ry={12} fill="currentColor" opacity={0.4} stroke="none" />
+      </g>
+    ));
+
+    // Axon
+    pushCell('axons', 'iosn', `iosn-axon-${i}`, (
+      <path d={`M ${x},${cy+30} C ${x+10},420 ${670},450 ${670},580`} />
+    ), true);
+  });
+
+  // 4. GBCs (Middle-Front Layer)
+  // Stacked tightly in a band from y=380 to 450
+  for (let i = 0; i < 35; i++) {
+    // Generate organic blobs randomly distributed in the zone
+    const x = 140 + Math.random() * 840;
+    const y = 390 + Math.random() * 50;
+    const r = 14 + Math.random() * 4;
+    
+    // Add slight wiggles to the circle
+    const d = `M ${x},${y-r} C ${x+r+2},${y-r-2} ${x+r+4},${y+r} ${x},${y+r} C ${x-r-3},${y+r+2} ${x-r-1},${y-r} ${x},${y-r} Z`;
+    pushCell('gbc', 'gbc', `gbc-${i}`, (
+      <g>
+        <path d={d} />
+        <circle cx={x} cy={y} r={r/2.5} fill="currentColor" opacity={0.4} stroke="none" />
+      </g>
+    ));
+  }
+
+  // 5. HBCs (Front Layer)
+  // Domes sitting on the basal lamina (y=480)
+  const hbcCount = 9;
+  const hbcWidth = (1000 - 140) / hbcCount;
+  for (let i = 0; i < hbcCount; i++) {
+    const xL = 140 + i * hbcWidth;
+    const xR = 140 + (i + 1) * hbcWidth;
+    const xM = (xL + xR) / 2;
+    const d = `M ${xL+5},480 C ${xL+5},440 ${xR-5},440 ${xR-5},480 Z`;
+    pushCell('hbc', 'hbc', `hbc-${i}`, (
+      <g>
+        <path d={d} />
+        {/* Reddish nuclei as per reference image */}
+        <ellipse cx={xM} cy={465} rx={12} ry={6} fill="#991b1b" opacity={0.8} stroke="none" />
+      </g>
+    ));
+  }
 
   return (
     <div className="w-full max-w-5xl mx-auto">
-      {/* Title label */}
       <div className="flex items-center justify-between mb-4 px-2">
         <div className="text-xs font-semibold uppercase tracking-widest text-gray-500 dark:text-gray-400">
           Apical Surface (Mucus Layer & Nasal Cavity) ↑
@@ -231,54 +242,39 @@ export default function OECrossSection({
 
       <div className="relative">
         <svg
-          viewBox="0 0 1000 450"
-          className="w-full h-auto rounded-2xl overflow-hidden border-2 border-gray-200 dark:border-slate-700 shadow-lg bg-white dark:bg-slate-900"
+          viewBox="0 0 1000 600"
+          className="w-full h-auto rounded-2xl overflow-hidden border-2 border-gray-200 dark:border-slate-700 shadow-2xl bg-[#e2e8f0] dark:bg-slate-900"
         >
           {/* Mucus Layer Background */}
-          <rect x="0" y="0" width="1000" height="40" fill="#e0f2fe" opacity={0.3} className="dark:fill-blue-900 dark:opacity-20" />
+          <rect x="0" y="0" width="1000" height="60" fill="#f0f9ff" opacity={0.5} className="dark:fill-blue-900 dark:opacity-20" />
           
-          {/* Basal Lamina Background */}
-          <rect x="0" y="390" width="1000" height="60" fill="#f5f5f4" className="dark:fill-stone-900" />
-          <line x1="0" y1="390" x2="1000" y2="390" stroke="#78716c" strokeWidth="4" strokeDasharray="10 5" opacity={0.6} />
+          {/* Lamina Propria Background */}
+          <rect x="0" y="480" width="1000" height="120" fill="#d6d3d1" className="dark:fill-stone-900" />
           
-          <text x={40} y={420} className="fill-gray-500 text-sm font-medium">Lamina Propria</text>
+          {/* Basal Lamina Line */}
+          <path d="M 120,480 Q 500,475 1000,480" fill="none" stroke="#57534e" strokeWidth={3} />
+          <text x={780} y={510} className="fill-gray-600 dark:fill-gray-400 text-sm font-medium">Lamina Propria</text>
 
-          {/* Render all cell instances */}
-          {/* 
-            To ensure proper layering (HBCs behind GBCs behind Sus cells etc),
-            we'll sort the rendering order roughly.
-            Order: Sus -> Bowman -> mOSN -> iOSN -> GBC -> HBC -> Tuft -> Ionocyte 
-            This ensures smaller front cells overlay larger back cells correctly.
-          */}
-          {['sustentacular', 'bowman', 'mosn', 'iosn', 'gbc', 'hbc', 'tuft', 'ionocyte'].map(layerType => (
-            <g key={`layer-${layerType}`}>
-              {instances.filter(inst => inst.typeId === layerType).map(inst => {
-                const style = getStyle(inst.id, inst.typeId);
-                
-                return (
-                  <motion.g
-                    key={inst.id}
-                    style={{ cursor: 'pointer' }}
-                    animate={style}
-                    initial={false}
-                    onMouseEnter={() => handleMouseEnter(inst.id, inst.typeId)}
-                    onMouseLeave={handleMouseLeave}
-                    onClick={() => handleClick(inst.typeId)}
-                    // Ensure lines drawn inside the cell inherit the stroke color
-                  >
-                    {React.cloneElement(inst.element as React.ReactElement, {
-                      // Apply the explicit stroke color to the primary shape elements
-                      stroke: style.stroke,
-                      fill: style.fill
-                    })}
-                  </motion.g>
-                );
-              })}
-            </g>
-          ))}
+          {/* Fibroblasts in Lamina Propria */}
+          <path d="M 300,520 Q 320,510 340,520 Q 320,530 300,520 Z" fill="#f472b6" opacity={0.6} />
+          <path d="M 750,550 Q 770,540 790,550 Q 770,560 750,550 Z" fill="#f472b6" opacity={0.6} />
+          <path d="M 450,570 Q 470,560 490,570 Q 470,580 450,570 Z" fill="#f472b6" opacity={0.6} />
+
+          {/* Olfactory Ensheathing Cell (OEC) Sheath passing through Lamina Propria */}
+          <path d="M 630,480 C 630,520 580,550 560,600 L 700,600 C 680,550 690,520 690,480 Z" fill="#a8a29e" opacity={0.5} stroke="#78716c" strokeWidth={2} />
+          <ellipse cx={640} cy={550} rx={15} ry={25} fill="#57534e" opacity={0.6} transform="rotate(30 640 550)" />
+
+          {/* Render Z-Layers Back to Front */}
+          {zLayers.sus.map(c => c.element)}
+          {zLayers.bowman.map(c => c.element)}
+          {zLayers.middle.map(c => c.element)}
+          {zLayers.gbc.map(c => c.element)}
+          {zLayers.hbc.map(c => c.element)}
+          {zLayers.axons.map(c => c.element)}
+
         </svg>
 
-        {/* Hover tooltip - Absolutely positioned over the diagram */}
+        {/* Hover tooltip */}
         <AnimatePresence>
           {hoveredCellId && !selectedCellId && (
             <motion.div
@@ -286,7 +282,7 @@ export default function OECrossSection({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.15 }}
-              className="absolute bottom-4 right-4 max-w-sm p-4 rounded-xl bg-white/95 dark:bg-slate-800/95 backdrop-blur-md border border-gray-200 dark:border-slate-600 shadow-xl pointer-events-none z-10"
+              className="absolute top-4 right-4 max-w-sm p-4 rounded-xl bg-white/95 dark:bg-slate-800/95 backdrop-blur-md border border-gray-200 dark:border-slate-600 shadow-2xl pointer-events-none z-10"
             >
               {(() => {
                 const cell = cellTypes.find(c => c.id === hoveredCellId);
@@ -316,7 +312,7 @@ export default function OECrossSection({
 
       <div className="flex items-center justify-between mt-4 px-2">
         <div className="text-xs font-semibold uppercase tracking-widest text-gray-500 dark:text-gray-400">
-          ↓ Basal Surface (Lamina Propria)
+          ↓ Deep Lamina Propria
         </div>
       </div>
     </div>
