@@ -100,7 +100,7 @@ export default function InteractiveSciencePage() {
             </motion.div>
 
             {/* Info Panel Container (Right hand side) */}
-            <div className="w-full xl:w-1/3 sticky top-24">
+            <div className="w-full xl:w-1/3 xl:sticky xl:top-24">
               <CellInfoPanel
                 selectedCellId={selectedCellId}
                 onClose={handleCellDeselect}

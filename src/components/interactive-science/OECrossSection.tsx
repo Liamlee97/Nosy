@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cellTypes } from '@/data/oeData';
 
@@ -16,14 +16,25 @@ export default function OECrossSection({
   onCellHover,
 }: OECrossSectionProps) {
   const [hoveredInstanceId, setHoveredInstanceId] = useState<string | null>(null);
+  const [isTouch, setIsTouch] = useState(false);
+
+  useEffect(() => {
+    setIsTouch(window.matchMedia('(hover: none) and (pointer: coarse)').matches);
+  }, []);
 
   const handleMouseEnter = (instanceId: string, typeId: string) => {
+    if (isTouch) return; // let touch events handle it
     setHoveredInstanceId(instanceId);
     onCellHover(typeId);
   };
   const handleMouseLeave = () => {
+    if (isTouch) return;
     setHoveredInstanceId(null);
     onCellHover(null);
+  };
+  const handleTouch = (instanceId: string, typeId: string) => {
+    // On touch: immediately select (skip hover state)
+    onCellSelect(typeId);
   };
   const handleClick = (typeId: string) => { onCellSelect(typeId); };
 
@@ -53,7 +64,6 @@ export default function OECrossSection({
     return { fill: 'none', stroke, strokeWidth, opacity, transition: 'all 0.25s ease' };
   };
 
-  // Wrapper to make a hoverable/clickable cell group
   const Cell = ({ id, typeId, children, isLine }: {
     id: string; typeId: string; children: React.ReactNode; isLine?: boolean;
   }) => (
@@ -63,6 +73,10 @@ export default function OECrossSection({
       initial={false}
       onMouseEnter={() => handleMouseEnter(id, typeId)}
       onMouseLeave={handleMouseLeave}
+      onTouchStart={(e) => {
+        e.stopPropagation();
+        handleTouch(id, typeId);
+      }}
       onClick={(e) => {
         e.stopPropagation();
         handleClick(typeId);
@@ -86,7 +100,7 @@ export default function OECrossSection({
           Apical Surface (Mucus Layer) ↑
         </span>
         <span className="text-xs text-gray-400 dark:text-gray-500 italic">
-          Hover to identify · Click to select
+          {isTouch ? 'Tap a cell to select' : 'Hover to identify · Click to select'}
         </span>
       </div>
 
