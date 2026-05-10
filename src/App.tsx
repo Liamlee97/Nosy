@@ -11,6 +11,7 @@ import { ThemeProvider } from './components/ThemeProvider';
 const Index = lazy(() => import('./pages/Index'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const AllArticlesPage = lazy(() => import('./pages/AllArticlesPage'));
+const ClinicalTrialsPage = lazy(() => import('./pages/ClinicalTrialsPage'));
 const AllConditionsPage = lazy(() => import('./pages/AllConditionsPage'));
 const ArticlePage = lazy(() => import('./pages/ArticlePage'));
 const ConditionDetailPage = lazy(() => import('./pages/ConditionDetailPage'));
@@ -34,6 +35,7 @@ const App = () => (
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/articles" element={<AllArticlesPage />} />
+                <Route path="/clinical-trials" element={<ClinicalTrialsPage />} />
                 <Route path="/conditions" element={<AllConditionsPage />} />
                 <Route path="/article/:id" element={<ArticlePage />} />
                 <Route path="/condition/:id" element={<ConditionDetailPage />} />

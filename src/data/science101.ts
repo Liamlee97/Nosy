@@ -16,58 +16,23 @@ import {
 export const smellFacts = [
     {
         icon: Brain,
-        title: "1 Trillion Scents",
-        description: "Research suggests humans can distinguish at least 1 trillion different olfactory stimuli, far more than the previously believed 10,000."
+        title: "10,000 Odors",
+        description: "Humans can distinguish at least 10,000 different odors. <sup><a href='https://pmc.ncbi.nlm.nih.gov/articles/PMC4483192/' target='_blank' rel='noopener noreferrer' class='text-blue-600 hover:underline'>[1]</a></sup>"
     },
     {
         icon: Zap,
         title: "Direct Connection",
-        description: "Smell is the only sense that bypasses the thalamus and connects directly to the brain's limbic system, which controls emotion and memory."
+        description: "Smell is the only sense that bypasses the thalamus and connects directly to the brain's limbic system, which controls emotion and memory. <sup><a href='https://pmc.ncbi.nlm.nih.gov/articles/PMC4330889/' target='_blank' rel='noopener noreferrer' class='text-blue-600 hover:underline'>[2]</a></sup>"
     },
     {
         icon: Target,
         title: "400 Receptors",
-        description: "Humans have approximately 400 different types of functional olfactory receptors, encoded by the largest gene family in our genome."
+        description: "Humans have approximately 400 different types of functional olfactory receptors, encoded by the largest gene family in our genome. <sup><a href='https://pmc.ncbi.nlm.nih.gov/articles/PMC2495065/' target='_blank' rel='noopener noreferrer' class='text-blue-600 hover:underline'>[3]</a></sup>"
     },
     {
         icon: Activity,
         title: "Constant Renewal",
-        description: "Olfactory sensory neurons are unique in the nervous system because they regenerate throughout life, with a lifespan of 30-60 days."
-    }
-];
-
-export const cellTypes = [
-    {
-        name: "Olfactory Receptor Neurons",
-        function: "Detect odor molecules and send signals to the brain",
-        lifespan: "30-60 days",
-        location: "Throughout olfactory epithelium",
-        color: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300",
-        details: "These are the primary sensing cells. Each neuron expresses only one type of odorant receptor. They have cilia (hair-like structures) extending into the mucus layer to catch odor molecules."
-    },
-    {
-        name: "Supporting (Sustentacular) Cells",
-        function: "Provide structural and metabolic support",
-        lifespan: "Several months",
-        location: "Surrounding receptor neurons",
-        color: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300",
-        details: "Similar to glial cells in the brain, these cells insulate receptor neurons, regulate the chemical environment (ionic balance), and help detoxify potentially harmful chemicals."
-    },
-    {
-        name: "Basal Cells",
-        function: "Stem cells for regeneration",
-        lifespan: "Long-lived",
-        location: "Base of the epithelium",
-        color: "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300",
-        details: "These are the stem cells responsible for the regeneration of the olfactory epithelium. They divide and differentiate to replace damaged or aged olfactory receptor neurons."
-    },
-    {
-        name: "Bowman's Glands",
-        function: "Produce olfactory mucus",
-        lifespan: "Long-lived",
-        location: "Lamina propria (connective tissue)",
-        color: "bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300",
-        details: "These glands secrete the mucus layer that covers the epithelium. This mucus is crucial for dissolving odor molecules and protecting the delicate sensory neurons."
+        description: "Olfactory sensory neurons are unique in the nervous system because they regenerate throughout life, with a lifespan of 30-60 days. <sup><a href='https://pmc.ncbi.nlm.nih.gov/articles/PMC2728470/' target='_blank' rel='noopener noreferrer' class='text-blue-600 hover:underline'>[4]</a></sup>"
     }
 ];
 
@@ -91,7 +56,7 @@ export const smellProcess = [
         title: "Receptor Binding",
         description: "Molecules bind to specific receptors",
         icon: Target,
-        details: "The dissolved molecules bind to specific receptor proteins on the cilia of the olfactory neurons. This works like a 'lock and key' mechanism."
+        details: "The dissolved molecules bind to specific receptor proteins on the cilia of the olfactory neurons."
     },
     {
         step: 4,
@@ -112,22 +77,17 @@ export const smellProcess = [
 export const misconceptions = [
     {
         myth: "Humans have a poor sense of smell",
-        truth: "Human olfaction is excellent and competitive with other mammals",
-        explanation: "While dogs have more receptors, humans are incredibly sensitive to certain odors (like geosmin/rain) and can track scent trails. The idea of microsmatic humans is largely a 19th-century myth."
+        truth: "Human olfaction is far better than most people think and can rival other mammals for certain odors. <sup><a href='https://pubmed.ncbi.nlm.nih.gov/28495701/' target='_blank' rel='noopener noreferrer' class='text-blue-600 hover:underline'>[6]</a></sup>",
+        explanation: "Although dogs have more smell receptors overall, humans are extremely sensitive to some specific odors (like the earthy smell after rain) and can even follow scent trails in experiments. The idea that humans are “microsmatic” with a weak sense of smell comes from 19th‑century speculation about brain anatomy, not from modern behavioral data."
     },
     {
         myth: "Taste is the main driver of flavor",
-        truth: "Smell is responsible for 75-95% of what we perceive as flavor",
-        explanation: "The tongue only detects sweet, sour, salty, bitter, and umami. The complex nuances of flavor (like strawberry vs. raspberry) come from retronasal olfaction—smelling from the back of the mouth."
+        truth: "Smell provides most of what we perceive as flavor. <sup><a href='https://pubmed.ncbi.nlm.nih.gov/22425641/' target='_blank' rel='noopener noreferrer' class='text-blue-600 hover:underline'>[7]</a></sup>",
+        explanation: "The tongue detects only five basic tastes: sweet, sour, salty, bitter, and umami. The complex nuances of flavor (like telling strawberry from raspberry) come largely from retronasal olfaction, when odor molecules from food travel from the back of your mouth up to your nose while you chew and swallow."
     },
     {
         myth: "Smell loss is trivial",
-        truth: "Anosmia is linked to depression and safety risks",
+        truth: "Anosmia is linked to depression, reduced quality of life, and real safety risks. <sup><a href='https://pmc.ncbi.nlm.nih.gov/articles/PMC5977071/' target='_blank' rel='noopener noreferrer' class='text-blue-600 hover:underline'>[8]</a></sup>",
         explanation: "Loss of smell affects appetite, social connection, and safety (detecting smoke/gas). It is strongly correlated with depression and reduced quality of life."
-    },
-    {
-        myth: "You can't learn to smell better",
-        truth: "The olfactory system is highly plastic and trainable",
-        explanation: "Smell training (repeated exposure to scents) can physically change the brain and improve sensitivity, similar to learning a musical instrument."
     }
 ];

@@ -32,24 +32,23 @@ function StepNode({
     >
       {/* Node circle */}
       <motion.div
-        className={`relative w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center border-3 shadow-lg transition-all duration-300 ${
-          isActive
+        className={`relative w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center border-3 shadow-lg transition-all duration-300 ${isActive
             ? 'border-blue-500 dark:border-blue-400 shadow-blue-200 dark:shadow-blue-900'
             : isPast
-            ? 'border-gray-300 dark:border-gray-600'
-            : 'border-gray-200 dark:border-gray-700'
-        }`}
+              ? 'border-gray-300 dark:border-gray-600'
+              : 'border-gray-200 dark:border-gray-700'
+          }`}
         style={{
           backgroundColor: isPast || isActive ? step.color : '#f3f4f6',
         }}
         animate={
           isActive
             ? {
-                boxShadow: [
-                  '0 0 0 0 rgba(59,130,246,0.2)',
-                  '0 0 0 12px rgba(59,130,246,0)',
-                ],
-              }
+              boxShadow: [
+                '0 0 0 0 rgba(59,130,246,0.2)',
+                '0 0 0 12px rgba(59,130,246,0)',
+              ],
+            }
             : {}
         }
         transition={
@@ -65,13 +64,12 @@ function StepNode({
 
       {/* Label */}
       <motion.span
-        className={`mt-2 text-xs md:text-sm font-semibold text-center max-w-[90px] md:max-w-[110px] leading-tight ${
-          isActive
+        className={`mt-2 text-xs md:text-sm font-semibold text-center max-w-[90px] md:max-w-[110px] leading-tight ${isActive
             ? 'text-gray-900 dark:text-white'
             : isPast
-            ? 'text-gray-600 dark:text-gray-400'
-            : 'text-gray-400 dark:text-gray-600'
-        }`}
+              ? 'text-gray-600 dark:text-gray-400'
+              : 'text-gray-400 dark:text-gray-600'
+          }`}
       >
         {step.label}
       </motion.span>
@@ -88,11 +86,10 @@ function StepArrow({ isActive, isPast }: { isActive: boolean; isPast: boolean })
       transition={{ duration: 0.3 }}
     >
       <ArrowRight
-        className={`w-5 h-5 md:w-6 md:h-6 ${
-          isPast || isActive
+        className={`w-5 h-5 md:w-6 md:h-6 ${isPast || isActive
             ? 'text-blue-500 dark:text-blue-400'
             : 'text-gray-300 dark:text-gray-600'
-        }`}
+          }`}
       />
     </motion.div>
   );

@@ -27,7 +27,7 @@ import {
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
-import { smellFacts, cellTypes, smellProcess, misconceptions } from '@/data/science101';
+import { smellFacts, smellProcess, misconceptions } from '@/data/science101';
 
 export default function Science101Page() {
   const [activeTab, setActiveTab] = useState('basics');
@@ -61,7 +61,7 @@ export default function Science101Page() {
               <CardContent className="pt-6">
                 <fact.icon className="w-8 h-8 text-blue-600 mx-auto mb-3 dark:text-blue-400" />
                 <h3 className="font-bold text-gray-900 mb-2 dark:text-white">{fact.title}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">{fact.description}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400" dangerouslySetInnerHTML={{ __html: fact.description }} />
               </CardContent>
             </Card>
           ))}
@@ -114,14 +114,6 @@ export default function Science101Page() {
                       </li>
                     </ul>
                   </div>
-                  <div className="bg-blue-50 p-6 rounded-lg dark:bg-blue-900/20">
-                    <h4 className="font-semibold text-blue-900 mb-3 dark:text-blue-300">Did You Know?</h4>
-                    <p className="text-blue-800 text-sm dark:text-blue-200">
-                      Smell is the only sense that bypasses the thalamus and connects directly to the
-                      limbic system - the brain's emotional center. This is why certain smells can
-                      instantly transport you back to childhood memories!
-                    </p>
-                  </div>
                 </div>
               </CardContent>
             </Card>
@@ -135,9 +127,6 @@ export default function Science101Page() {
                   <Microscope className="w-6 h-6 mr-3 text-purple-600 dark:text-purple-400" />
                   The Olfactory Epithelium
                 </CardTitle>
-                <CardDescription className="dark:text-gray-400">
-                  A specialized tissue about the size of a postage stamp that contains millions of smell-detecting cells
-                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-6">
@@ -145,8 +134,8 @@ export default function Science101Page() {
                     <h4 className="font-semibold text-gray-900 mb-3 dark:text-white">Location & Structure</h4>
                     <p className="text-gray-700 mb-4 dark:text-gray-300">
                       The olfactory epithelium is located high up in your nasal cavity, behind the bridge of your nose.
-                      It's a thin layer of specialized tissue, only about 1-2 square centimeters in area, but packed
-                      with millions of smell-detecting neurons.
+                      It's a thin layer of specialized tissue, only about 10 cm<sup>2</sup> across both nostrils combined, but packed
+                      with millions of smell-detecting neurons. <sup><a href='https://www.ncbi.nlm.nih.gov/books/NBK11032/' target='_blank' rel='noopener noreferrer' class='text-blue-600 hover:underline'>[5]</a></sup>
                     </p>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       <div className="text-center">
@@ -160,40 +149,44 @@ export default function Science101Page() {
                         <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2 dark:bg-blue-900/30">
                           <Activity className="w-8 h-8 text-blue-600 dark:text-blue-400" />
                         </div>
-                        <h5 className="font-medium text-gray-900 dark:text-white">Cell Layer</h5>
-                        <p className="text-xs text-gray-600 dark:text-gray-400">Contains smell neurons</p>
+                        <h5 className="font-medium text-gray-900 dark:text-white">Olfactory Epithelium Layer</h5>
+                        <p className="text-xs text-gray-600 dark:text-gray-400">Contains olfactory sensory neurons, supporting cells, and basal cells that detect odors and generate nerve signals.</p>
                       </div>
                       <div className="text-center">
                         <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2 dark:bg-green-900/30">
                           <Zap className="w-8 h-8 text-green-600 dark:text-green-400" />
                         </div>
-                        <h5 className="font-medium text-gray-900 dark:text-white">Nerve Layer</h5>
-                        <p className="text-xs text-gray-600 dark:text-gray-400">Carries signals to brain</p>
+                        <h5 className="font-medium text-gray-900 dark:text-white">Olfactory Nerve Fibers</h5>
+                        <p className="text-xs text-gray-600 dark:text-gray-400">Bundles of axons that transmit olfactory information from the olfactory sensory neurons to the olfactory bulb in the brain.</p>
                       </div>
                     </div>
                   </div>
 
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-4 dark:text-white">Cell Types in the Olfactory Epithelium</h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {cellTypes.map((cell, index) => (
-                        <Card key={index} className="hover:shadow-md transition-shadow dark:bg-slate-900 dark:border-slate-800">
-                          <CardHeader className="pb-3">
-                            <div className="flex items-center justify-between">
-                              <CardTitle className="text-lg dark:text-white">{cell.name}</CardTitle>
-                              <Badge className={cell.color}>{cell.lifespan}</Badge>
-                            </div>
-                            <CardDescription className="text-sm dark:text-gray-400">{cell.function}</CardDescription>
-                          </CardHeader>
-                          <CardContent className="pt-0">
-                            <p className="text-sm text-gray-600 mb-2 dark:text-gray-400">
-                              <strong>Location:</strong> {cell.location}
+                  <div className="mt-8">
+                    <Link to="/interactive-science" className="block group">
+                      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-600 via-indigo-600 to-blue-700 p-1 shadow-xl transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/20 hover:scale-[1.01] active:scale-[0.99]">
+                        <div className="relative rounded-[15px] bg-white dark:bg-slate-950 p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-8 overflow-hidden">
+                          {/* Abstract ambient circles background */}
+                          <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-blue-500/10 blur-3xl" />
+                          <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-indigo-500/10 blur-3xl" />
+
+                          <div className="relative flex-1 space-y-3">
+                            <h4 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
+                              Cell Types in the Olfactory Epithelium
+                            </h4>
+                            <p className="text-base md:text-lg text-gray-600 dark:text-gray-300 max-w-2xl">
+                              Visit our Interactive Basic Science page for a visual breakdown and detailed information on each cell type in the olfactory epithelium.
                             </p>
-                            <p className="text-sm text-gray-700 dark:text-gray-300">{cell.details}</p>
-                          </CardContent>
-                        </Card>
-                      ))}
-                    </div>
+                          </div>
+                          <div className="relative shrink-0">
+                            <Button size="lg" className="rounded-full h-12 px-6 bg-blue-600 text-white font-medium shadow-md hover:bg-blue-700 transition-all group-hover:translate-y-[-1px]">
+                              Goto page
+                              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
                   </div>
                 </div>
               </CardContent>
@@ -208,9 +201,6 @@ export default function Science101Page() {
                   <ArrowRight className="w-6 h-6 mr-3 text-green-600 dark:text-green-400" />
                   The Journey from Molecule to Perception
                 </CardTitle>
-                <CardDescription className="dark:text-gray-400">
-                  Follow the step-by-step process of how we detect and interpret smells
-                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-8">
@@ -254,74 +244,66 @@ export default function Science101Page() {
                 <div className="bg-gradient-to-r from-pink-50 to-purple-50 p-6 rounded-lg dark:from-pink-900/20 dark:to-purple-900/20">
                   <h4 className="font-semibold text-gray-900 mb-3 dark:text-white">The Olfactory Pathway</h4>
                   <p className="text-gray-700 mb-4 dark:text-gray-300">
-                    Unlike other senses, smell has a direct highway to your brain's emotional and memory centers.
-                    This unique pathway explains why smells can trigger such powerful emotional responses and vivid memories.
+                    Unlike most other senses, smell takes a relatively direct route to brain areas involved in emotion and memory, skipping the typical thalamus relay. This wiring helps explain why smells can trigger such intense feelings and vivid memories.
                   </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <Card className="border-blue-200 bg-blue-50 dark:bg-blue-900/20 dark:border-blue-900/50">
+                  <Card className="relative border-blue-200 bg-blue-50 dark:bg-blue-900/20 dark:border-blue-900/50">
                     <CardHeader>
-                      <CardTitle className="text-lg text-blue-900 dark:text-blue-300">Olfactory Bulb</CardTitle>
+                      <CardTitle className="flex items-center text-lg text-blue-900 dark:text-blue-300">
+                        <span className="flex items-center justify-center w-6 h-6 mr-2 rounded-full bg-blue-600 text-white text-xs font-bold">1</span>
+                        Olfactory Bulb
+                      </CardTitle>
                     </CardHeader>
                     <CardContent>
                       <p className="text-blue-800 text-sm dark:text-blue-200">
-                        The first stop for smell signals. Here, information from millions of smell receptors
-                        is organized and processed before being sent to other brain regions.
+                        The first stop for smell signals. Here, input from millions of smell receptors is organized into patterns and processed before being sent on to other brain regions.
                       </p>
                     </CardContent>
                   </Card>
 
-                  <Card className="border-purple-200 bg-purple-50 dark:bg-purple-900/20 dark:border-purple-900/50">
+                  <Card className="relative border-green-200 bg-green-50 dark:bg-green-900/20 dark:border-green-900/50">
                     <CardHeader>
-                      <CardTitle className="text-lg text-purple-900 dark:text-purple-300">Limbic System</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-purple-800 text-sm dark:text-purple-200">
-                        The emotional brain. Smell signals go directly here, which is why certain scents
-                        can instantly make you feel happy, sad, or nostalgic.
-                      </p>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="border-green-200 bg-green-50 dark:bg-green-900/20 dark:border-green-900/50">
-                    <CardHeader>
-                      <CardTitle className="text-lg text-green-900 dark:text-green-300">Hippocampus</CardTitle>
+                      <CardTitle className="flex items-center text-lg text-green-900 dark:text-green-300">
+                        <span className="flex items-center justify-center w-6 h-6 mr-2 rounded-full bg-green-600 text-white text-xs font-bold">2</span>
+                        Piriform Cortex
+                      </CardTitle>
                     </CardHeader>
                     <CardContent>
                       <p className="text-green-800 text-sm dark:text-green-200">
-                        The memory center. This connection explains why smells are such powerful memory
-                        triggers - like how your grandmother's perfume can bring back childhood memories.
+                        The primary smell cortex. It receives input from the olfactory bulb and helps form the basic ‘odor object’ (what the smell is) before that information spreads to emotion, memory, and decision‑making areas.
                       </p>
                     </CardContent>
                   </Card>
 
-                  <Card className="border-orange-200 bg-orange-50 dark:bg-orange-900/20 dark:border-orange-900/50">
+                  <Card className="relative border-purple-200 bg-purple-50 dark:bg-purple-900/20 dark:border-purple-900/50">
                     <CardHeader>
-                      <CardTitle className="text-lg text-orange-900 dark:text-orange-300">Orbitofrontal Cortex</CardTitle>
+                      <CardTitle className="flex items-center text-lg text-purple-900 dark:text-purple-300">
+                        <span className="flex items-center justify-center w-6 h-6 mr-2 rounded-full bg-purple-600 text-white text-xs font-bold">3</span>
+                        Limbic System
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-purple-800 text-sm dark:text-purple-200">
+                        The emotional brain. Smell signals reach limbic areas like the amygdala and hippocampus, which helps explain why scents can instantly stir strong feelings and vivid memories.
+                      </p>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="relative border-orange-200 bg-orange-50 dark:bg-orange-900/20 dark:border-orange-900/50">
+                    <CardHeader>
+                      <CardTitle className="flex items-center text-lg text-orange-900 dark:text-orange-300">
+                        <span className="flex items-center justify-center w-6 h-6 mr-2 rounded-full bg-orange-600 text-white text-xs font-bold">4</span>
+                        Orbitofrontal Cortex
+                      </CardTitle>
                     </CardHeader>
                     <CardContent>
                       <p className="text-orange-800 text-sm dark:text-orange-200">
-                        Where conscious smell perception happens. This area helps you identify what you're
-                        smelling and decide whether it's pleasant or unpleasant.
+                        A key site for conscious smell experience. This area helps you identify what you’re smelling and judge whether it’s pleasant, unpleasant, or worth paying attention to.
                       </p>
                     </CardContent>
                   </Card>
-                </div>
-
-                <div className="bg-yellow-50 border border-yellow-200 p-6 rounded-lg dark:bg-yellow-900/20 dark:border-yellow-900/50">
-                  <div className="flex items-start space-x-3">
-                    <Sparkles className="w-6 h-6 text-yellow-600 mt-1 flex-shrink-0 dark:text-yellow-400" />
-                    <div>
-                      <h4 className="font-semibold text-yellow-900 mb-2 dark:text-yellow-300">The Smell-Memory Connection</h4>
-                      <p className="text-yellow-800 text-sm dark:text-yellow-200">
-                        The phenomenon where smells trigger vivid memories is called the "Proust Effect,"
-                        named after the French author who wrote about how the smell of madeleines brought
-                        back childhood memories. This happens because smell and memory pathways are so
-                        closely connected in the brain.
-                      </p>
-                    </div>
-                  </div>
                 </div>
               </CardContent>
             </Card>
@@ -353,7 +335,7 @@ export default function Science101Page() {
                         <div className="space-y-3 pl-8">
                           <div className="flex items-start space-x-3">
                             <CheckCircle className="w-5 h-5 text-green-500 mt-1 flex-shrink-0" />
-                            <span className="text-green-700 font-medium dark:text-green-400">Truth: {item.truth}</span>
+                            <span className="text-green-700 font-medium dark:text-green-400" dangerouslySetInnerHTML={{ __html: `Truth: ${item.truth}` }} />
                           </div>
                           <p className="text-gray-700 bg-gray-50 p-4 rounded-lg dark:bg-slate-800 dark:text-gray-300">
                             <strong>Explanation:</strong> {item.explanation}
@@ -363,29 +345,6 @@ export default function Science101Page() {
                     </AccordionItem>
                   ))}
                 </Accordion>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-gradient-to-r from-blue-50 to-green-50 border-blue-200 dark:from-blue-900/20 dark:to-green-900/20 dark:border-blue-900/50">
-              <CardHeader>
-                <CardTitle className="text-xl text-blue-900 dark:text-blue-300">Want to Learn More?</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-blue-800 mb-4 dark:text-blue-200">
-                  Explore our research articles and condition guides to dive deeper into the fascinating world of smell science.
-                </p>
-                <div className="flex flex-wrap gap-3">
-                  <Link to="/articles">
-                    <Button variant="outline" className="border-blue-300 text-blue-700 hover:bg-blue-100 dark:border-blue-700 dark:text-blue-300 dark:hover:bg-blue-900/30">
-                      Research Articles
-                    </Button>
-                  </Link>
-                  <Link to="/conditions">
-                    <Button variant="outline" className="border-green-300 text-green-700 hover:bg-green-100 dark:border-green-700 dark:text-green-300 dark:hover:bg-green-900/30">
-                      Smell Disorders
-                    </Button>
-                  </Link>
-                </div>
               </CardContent>
             </Card>
           </TabsContent>

@@ -21,6 +21,7 @@ export default function Header() {
 
                     <nav className="hidden md:flex items-center space-x-6">
                         <Link to="/articles" className="text-gray-700 hover:text-blue-600 transition-colors dark:text-gray-300 dark:hover:text-blue-400">Article Collection</Link>
+                        <Link to="/clinical-trials" className="text-gray-700 hover:text-blue-600 transition-colors dark:text-gray-300 dark:hover:text-blue-400">Clinical Trials</Link>
                         <Link to="/conditions" className="text-gray-700 hover:text-blue-600 transition-colors dark:text-gray-300 dark:hover:text-blue-400">Conditions</Link>
                         <Link to="/science101" className="text-gray-700 hover:text-blue-600 transition-colors dark:text-gray-300 dark:hover:text-blue-400">Science 101</Link>
                         <Link to="/interactive-science" className="text-gray-700 hover:text-blue-600 transition-colors dark:text-gray-300 dark:hover:text-blue-400">Interactive Basic Science</Link>

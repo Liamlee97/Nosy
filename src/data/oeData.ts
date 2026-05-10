@@ -60,10 +60,43 @@ export const cellTypes: CellType[] = [
     description: 'Columnar supporting cells spanning from the apical surface to the basal lamina. They maintain the ionic microenvironment, provide metabolic support, and express cytochrome P450 enzymes that detoxify inhaled chemicals.',
     markers: ['Hes1', 'SUS-4', 'CYP2A13', 'CYP1A2'],
     functions: [
-      'Ionic environment maintenance',
-      'Structural support for OSNs',
-      'Xenobiotic metabolism / detoxification',
-      'Phagocytosis of apoptotic neurons'
+      'Metabolic and structural support',
+      'Xenobiotic metabolism (detoxification)',
+      'Phagocytosis of dead OSNs'
+    ],
+    perturbationIds: ['covid-19']
+  },
+  {
+    id: 'ionocyte',
+    name: 'Ionocyte',
+    shortName: 'Ionocyte',
+    layer: 'apical',
+    color: '#d946ef',      // fuchsia-500
+    darkColor: '#701a75',   // fuchsia-900
+    hoverColor: '#f0abfc',  // fuchsia-300
+    description: 'Rare epithelial cells involved in fluid and ion transport. They maintain the optimal ionic composition of the olfactory mucus, which is critical for olfactory signal transduction.',
+    markers: ['FOXI1', 'CFTR', 'ATP6V1B1'],
+    functions: [
+      'Fluid and electrolyte balance',
+      'Regulation of mucosal pH',
+      'Maintenance of olfactory mucus'
+    ],
+    perturbationIds: []
+  },
+  {
+    id: 'tuft',
+    name: 'Tuft Cell (Microvillar Cell)',
+    shortName: 'Tuft Cell',
+    layer: 'apical',
+    color: '#38bdf8',      // sky-400
+    darkColor: '#0369a1',   // sky-700
+    hoverColor: '#7dd3fc',  // sky-300
+    description: 'Chemosensory cells with an apical tuft of microvilli. They detect bacterial metabolites and allergens, initiating type 2 immune responses and neurogenic inflammation.',
+    markers: ['TRPM5', 'ChAT', 'DCLK1', 'VILL'],
+    functions: [
+      'Detection of irritants and pathogens',
+      'Modulation of immune responses',
+      'Regulation of epithelial homeostasis'
     ],
     perturbationIds: []
   },
@@ -200,6 +233,40 @@ export const cellTypes: CellType[] = [
     functions: [
       'Chemosensation of irritants/metabolites',
       'Initiation of type 2 immune responses'
+    ],
+    perturbationIds: []
+  },
+  {
+    id: 'oec',
+    name: 'Olfactory Ensheathing Cell (OEC)',
+    shortName: 'OEC',
+    layer: 'basement',
+    color: '#a8a29e',      // stone-400
+    darkColor: '#78716c',   // stone-500
+    hoverColor: '#d6d3d1',  // stone-300
+    description: 'Specialized glial cells that ensheath bundles of unmyelinated olfactory sensory neuron axons as they exit the epithelium and travel through the cribriform plate. They play a critical role in supporting axon growth and guiding them to the olfactory bulb.',
+    markers: ['GFAP', 'S100β', 'p75NTR'],
+    functions: [
+      'Ensheath and support OSN axons',
+      'Provide growth-promoting environment',
+      'Guide regenerating axons to the olfactory bulb'
+    ],
+    perturbationIds: []
+  },
+  {
+    id: 'fibroblast',
+    name: 'Lamina Propria Fibroblast',
+    shortName: 'Fibroblast',
+    layer: 'basement',
+    color: '#f472b6',      // pink-400
+    darkColor: '#db2777',   // pink-600
+    hoverColor: '#fdf2f8',  // pink-50
+    description: 'Stromal cells residing in the lamina propria beneath the olfactory epithelium. They secrete the extracellular matrix (collagens, fibronectin) that provides structural integrity, and produce signaling factors important for epithelial maintenance and regeneration.',
+    markers: ['Vimentin', 'PDGFRα', 'Collagen I'],
+    functions: [
+      'Extracellular matrix (ECM) production',
+      'Structural support of the lamina propria',
+      'Paracrine signaling for tissue repair'
     ],
     perturbationIds: []
   }

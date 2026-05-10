@@ -23,11 +23,11 @@ import {
 } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { ClinicalTrialsTable } from '@/components/ClinicalTrialsTable';
+
 
 import { getAllArticles } from '@/data/articles/index';
 
-const categories = ["All", "Fascinating History & Facts", "Clinical Trials Explained"];
+const categories = ["All", "Fascinating History & Facts"];
 
 export default function AllArticlesPage() {
   const [allArticles, setAllArticles] = useState(getAllArticles());
@@ -111,7 +111,6 @@ export default function AllArticlesPage() {
                 placeholder="Search articles..."
                 value={searchQuery}
                 onChange={(e) => handleSearch(e.target.value)}
-                disabled={selectedCategory === 'Clinical Trials Explained'}
                 className="pl-10 pr-4 py-2 dark:bg-slate-900 dark:border-slate-700 dark:text-white"
               />
             </div>
@@ -119,7 +118,6 @@ export default function AllArticlesPage() {
               <Select
                 value={sortOrder}
                 onValueChange={(value: 'newest' | 'oldest') => handleSortChange(value)}
-                disabled={selectedCategory === 'Clinical Trials Explained'}
               >
                 <SelectTrigger className="dark:bg-slate-900 dark:border-slate-700 dark:text-white">
                   <SelectValue placeholder="Sort by" />
@@ -148,14 +146,8 @@ export default function AllArticlesPage() {
           </div>
         </div>
 
-        {selectedCategory === 'Clinical Trials Explained' ? (
-          <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <ClinicalTrialsTable />
-          </div>
-        ) : (
-          <>
-            {/* Results Summary */}
-            <div className="mb-6 text-center">
+        {/* Results Summary */}
+        <div className="mb-6 text-center">
               <p className="text-gray-600 dark:text-gray-400">
                 Showing {filteredArticles.length} of {allArticles.length} articles
                 {selectedCategory !== 'All' && ` in "${selectedCategory}"`}
@@ -245,8 +237,6 @@ export default function AllArticlesPage() {
                   Load More Articles
                 </Button>
               </div>
-            )}
-          </>
         )}
       </div>
 
