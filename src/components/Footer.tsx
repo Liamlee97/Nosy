@@ -32,11 +32,7 @@ export default function Footer() {
                     <div>
                         © 2025 Nosy. All rights reserved.
                     </div>
-                    <div className="mt-4 md:mt-0">
-                        <span className="mr-4">🔬 Written by scientists</span>
-                        <span className="mr-4">💡 For everyone</span>
-                        <span>❤️ With empathy</span>
-                    </div>
+
                 </div>
 
                 {/* Medical Disclaimer */}
