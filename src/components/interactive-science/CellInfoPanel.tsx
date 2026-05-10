@@ -52,9 +52,7 @@ export default function CellInfoPanel({ selectedCellId, onClose, onRunPerturbati
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{cell.name}</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                    Layer: <span className="capitalize font-medium">{cell.layer.replace('-', ' ')}</span>
-                  </p>
+
                 </div>
               </div>
 
@@ -63,8 +61,7 @@ export default function CellInfoPanel({ selectedCellId, onClose, onRunPerturbati
                 {cell.description}
               </p>
 
-              {/* Two-column detail */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="mb-8">
                 {/* Markers */}
                 <div className="rounded-xl bg-gray-50 dark:bg-slate-800/50 p-4 border border-gray-100 dark:border-slate-700">
                   <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
@@ -81,22 +78,6 @@ export default function CellInfoPanel({ selectedCellId, onClose, onRunPerturbati
                       </span>
                     ))}
                   </div>
-                </div>
-
-                {/* Functions */}
-                <div className="rounded-xl bg-gray-50 dark:bg-slate-800/50 p-4 border border-gray-100 dark:border-slate-700">
-                  <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
-                    <FlaskConical className="w-4 h-4 text-green-500" />
-                    Key Functions
-                  </h4>
-                  <ul className="space-y-1.5">
-                    {cell.functions.map((fn) => (
-                      <li key={fn} className="text-sm text-gray-600 dark:text-gray-300 flex items-start gap-2">
-                        <ChevronRight className="w-3 h-3 mt-1 flex-shrink-0 text-green-500" />
-                        {fn}
-                      </li>
-                    ))}
-                  </ul>
                 </div>
               </div>
 

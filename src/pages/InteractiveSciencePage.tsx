@@ -126,8 +126,7 @@ export default function InteractiveSciencePage() {
                             <h4 className="font-bold text-xl text-gray-900 dark:text-white leading-tight">{cell.name}</h4>
                           </div>
                           <p className="text-gray-600 dark:text-gray-300 line-clamp-3 leading-relaxed mb-4">{cell.description}</p>
-                          <div className="pt-3 border-t border-gray-100 dark:border-slate-800 flex justify-between items-center">
-                            <span className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">{cell.layer.replace('-', ' ')}</span>
+                          <div className="pt-3 border-t border-gray-100 dark:border-slate-800 flex justify-end items-center">
                             <span className="text-sm text-blue-600 dark:text-blue-400 font-bold">Click to select</span>
                           </div>
                         </div>

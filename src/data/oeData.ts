@@ -32,50 +32,34 @@ export interface Perturbation {
 }
 
 export const cellTypes: CellType[] = [
-  {
-    id: 'cilia',
-    name: 'Cilia & Olfactory Knobs',
-    shortName: 'Cilia',
-    layer: 'apical',
-    color: '#a7f3d0',      // emerald-200
-    darkColor: '#065f46',   // emerald-800
-    hoverColor: '#6ee7b7',  // emerald-300
-    description: 'Thin sensory projections extending from OSN dendrites into the mucus layer. Each mature OSN has 10–30 cilia that contain odorant receptors and the signal transduction machinery (Golf, ACIII, CNG channels).',
-    markers: ['OMP (on parent OSN)', 'ACIII', 'Golf'],
-    functions: [
-      'Odorant binding via receptors',
-      'Signal transduction (cAMP cascade)',
-      'Interface between external odors and neural signaling'
-    ],
-    perturbationIds: []
-  },
+
   {
     id: 'sustentacular',
-    name: 'Sustentacular (Supporting) Cells',
+    name: 'Sustentacular Cells',
     shortName: 'Sus Cells',
     layer: 'apical',
     color: '#a3e635',      // Olive green
-    darkColor: '#4d7c0f',   
-    hoverColor: '#bef264',  
-    description: 'Columnar supporting cells spanning from the apical surface to the basal lamina. They maintain the ionic microenvironment, provide metabolic support, and express cytochrome P450 enzymes that detoxify inhaled chemicals.',
-    markers: ['Hes1', 'SUS-4', 'CYP2A13', 'CYP1A2'],
+    darkColor: '#4d7c0f',
+    hoverColor: '#bef264',
+    description: 'Columnar supporting cells spanning from the apical surface to the basal lamina. They maintain the ionic and metabolic microenvironment of olfactory sensory neurons and participate in xenobiotic detoxification.',
+    markers: ['HES1', 'CYP2A13', 'CYP1A2'],
     functions: [
       'Metabolic and structural support',
       'Xenobiotic metabolism (detoxification)',
       'Phagocytosis of dead OSNs'
     ],
-    perturbationIds: ['covid-19']
+    perturbationIds: []
   },
   {
     id: 'ionocyte',
-    name: 'Ionocyte',
+    name: 'Ionocytes',
     shortName: 'Ionocyte',
     layer: 'apical',
     color: '#d946ef',      // fuchsia-500
     darkColor: '#701a75',   // fuchsia-900
     hoverColor: '#f0abfc',  // fuchsia-300
-    description: 'Rare epithelial cells involved in fluid and ion transport. They maintain the optimal ionic composition of the olfactory mucus, which is critical for olfactory signal transduction.',
-    markers: ['FOXI1', 'CFTR', 'ATP6V1B1'],
+    description: 'Rare epithelial cells involved in fluid and ion transport. They help regulate the ionic composition, pH, and physical properties of the olfactory mucus. Not much is known about this cell type relative to other cell types.',
+    markers: ['FOXI1', 'CFTR', 'ATP6V1B1', 'ASCL3'],
     functions: [
       'Fluid and electrolyte balance',
       'Regulation of mucosal pH',
@@ -85,14 +69,14 @@ export const cellTypes: CellType[] = [
   },
   {
     id: 'tuft',
-    name: 'Tuft Cell (Microvillar Cell)',
+    name: 'Tuft Cells',
     shortName: 'Tuft Cell',
     layer: 'apical',
     color: '#38bdf8',      // sky-400
     darkColor: '#0369a1',   // sky-700
     hoverColor: '#7dd3fc',  // sky-300
-    description: 'Chemosensory cells with an apical tuft of microvilli. They detect bacterial metabolites and allergens, initiating type 2 immune responses and neurogenic inflammation.',
-    markers: ['TRPM5', 'ChAT', 'DCLK1', 'VILL'],
+    description: 'Specialized chemosensory cells that protrude into the mucus layer. They detect irritants, allergens, and microbial signals and help initiate immune and epithelial repair responses.',
+    markers: ['TRPM5', 'DCLK1', 'POU2F3', 'CHAT', 'VIL1'],
     functions: [
       'Detection of irritants and pathogens',
       'Modulation of immune responses',
@@ -106,10 +90,10 @@ export const cellTypes: CellType[] = [
     shortName: 'mOSNs',
     layer: 'upper-middle',
     color: '#ef4444',      // Deep red
-    darkColor: '#7f1d1d',   
-    hoverColor: '#f87171',  
-    description: 'Fully differentiated bipolar neurons. Each expresses a single odorant receptor gene (one-receptor-one-neuron rule). Their axons project through the cribriform plate to specific glomeruli in the olfactory bulb. They are continuously replaced throughout life, with a lifespan of ~30–60 days.',
-    markers: ['OMP', 'Single OR gene', 'Mature neuronal markers'],
+    darkColor: '#7f1d1d',
+    hoverColor: '#f87171',
+    description: 'Fully differentiated bipolar neurons that detect odorants. Each neuron expresses one odorant receptor gene and sends an axon to defined glomeruli in the olfactory bulb.',
+    markers: ['OMP', 'NCAM1', 'PGP 9.5', 'Odorant receptor genes'],
     functions: [
       'Odor detection via single OR expression',
       'Signal transduction to olfactory bulb',
@@ -123,10 +107,10 @@ export const cellTypes: CellType[] = [
     shortName: 'iOSNs',
     layer: 'middle',
     color: '#f97316',      // Orange
-    darkColor: '#c2410c',   
-    hoverColor: '#fdba74',  
-    description: 'Newly born neurons in the process of maturing. They express GAP43 (a growth-associated protein) but have not yet fully extended their axons to the olfactory bulb or established stable OR expression.',
-    markers: ['GAP43', 'β-tubulin III', 'SCG10'],
+    darkColor: '#c2410c',
+    hoverColor: '#fdba74',
+    description: 'Newly generated neurons in the process of maturing. They extend axons, acquire neuronal identity, and transition toward mature odor-responsive olfactory sensory neurons.',
+    markers: ['GAP43', 'TUBB3', 'SCG10'],
     functions: [
       'Axon extension toward olfactory bulb',
       'OR gene choice and stabilization',
@@ -140,10 +124,10 @@ export const cellTypes: CellType[] = [
     shortName: 'GBCs',
     layer: 'lower-middle',
     color: '#fcd34d',      // Yellow/Gold
-    darkColor: '#b45309',   
-    hoverColor: '#fde68a',  
-    description: 'Transit-amplifying progenitor cells that actively proliferate. They are the main source of new neurons and non-neuronal cells during both normal turnover and regeneration after injury.',
-    markers: ['Ascl1 (Mash1)', 'Notch1', 'Neurog1', 'NeuroD1', 'Sox2'],
+    darkColor: '#b45309',
+    hoverColor: '#fde68a',
+    description: 'Transit-amplifying progenitor cells that actively proliferate. They are the principal source of new olfactory neurons during normal turnover and contribute to regeneration after injury.',
+    markers: ['ASCL1', 'NEUROG1', 'NEUROD1'],
     functions: [
       'Active proliferation for neuronal replacement',
       'Give rise to iOSNs → mOSNs',
@@ -158,17 +142,17 @@ export const cellTypes: CellType[] = [
     shortName: 'HBCs',
     layer: 'basal',
     color: '#3b82f6',      // Deep Blue
-    darkColor: '#1e3a8a',   
-    hoverColor: '#60a5fa',  
-    description: 'Reserve stem cells that sit directly on the basal lamina. Under normal conditions, they are quiescent — held dormant by high expression of the transcription factor p63 (Trp63). Upon severe injury, p63 is downregulated, causing HBCs to activate, proliferate, and reconstitute all cell types in the OE.',
-    markers: ['Krt5', 'CD54', 'Krt14', 'p63 (Trp63)', 'ICAM-1'],
+    darkColor: '#1e3a8a',
+    hoverColor: '#60a5fa',
+    description: 'Quiescent reserve stem cells that reside directly on the basal lamina. After severe injury they activate, proliferate, and can regenerate multiple olfactory epithelial cell types.',
+    markers: ['KRT5', 'KRT14', 'TP63', 'NRCAM'],
     functions: [
       'Reserve stem cell pool (quiescent)',
       'Activated by severe injury (p63 downregulation)',
       'Multipotent: can produce GBCs, OSNs, Sus cells, duct/gland cells',
       'Essential for full epithelial regeneration'
     ],
-    perturbationIds: ['p63-knockdown', 'methimazole-injury']
+    perturbationIds: []
   },
   {
     id: 'basal-lamina',
@@ -178,7 +162,7 @@ export const cellTypes: CellType[] = [
     color: '#d6d3d1',      // stone-300
     darkColor: '#44403c',   // stone-700
     hoverColor: '#a8a29e',  // stone-400
-    description: 'The extracellular matrix boundary separating the olfactory epithelium from the underlying lamina propria. It provides structural support and contains signaling molecules that influence cell behavior.',
+    description: 'Extracellular matrix boundary separating the olfactory epithelium from the lamina propria. It provides structural support and signaling cues for basal cells.',
     markers: ['Laminin', 'Collagen IV', 'Fibronectin'],
     functions: [
       'Structural boundary and scaffold',
@@ -193,10 +177,10 @@ export const cellTypes: CellType[] = [
     shortName: 'Bowman\'s Duct',
     layer: 'apical',
     color: '#166534',      // Dark green
-    darkColor: '#052e16',   
-    hoverColor: '#15803d',  
-    description: 'Duct structures that extend from Bowman\'s glands in the lamina propria up to the epithelial surface. They secrete the mucus that coats the olfactory epithelium, providing the solvent for odorants and harboring odorant binding proteins (OBPs).',
-    markers: ['Sox9', 'Mucins (e.g., Muc5AC)'],
+    darkColor: '#052e16',
+    hoverColor: '#15803d',
+    description: 'Duct structures connecting Bowman\'s glands in the lamina propria to the epithelial surface. They deliver secretions that contribute to the mucus layer covering the olfactory epithelium.',
+    markers: ['SOX9', 'MUC5AC'],
     functions: [
       'Mucus secretion',
       'Delivery of odorant binding proteins',
@@ -204,48 +188,17 @@ export const cellTypes: CellType[] = [
     ],
     perturbationIds: []
   },
-  {
-    id: 'ionocyte',
-    name: 'Ionocyte',
-    shortName: 'Ionocyte',
-    layer: 'apical',
-    color: '#7dd3fc',      // Light blue
-    darkColor: '#0284c7',   
-    hoverColor: '#bae6fd',  
-    description: 'A rare epithelial cell type involved in fluid and ion transport. They express CFTR (Cystic Fibrosis Transmembrane Conductance Regulator) and are thought to regulate the ionic composition of the olfactory mucus.',
-    markers: ['CFTR', 'Foxi1', 'Ascl3'],
-    functions: [
-      'Ion transport',
-      'Mucus rheology regulation'
-    ],
-    perturbationIds: []
-  },
-  {
-    id: 'tuft',
-    name: 'Tuft Cell (Microvillous Cell)',
-    shortName: 'Tuft Cell',
-    layer: 'apical',
-    color: '#7dd3fc',      // Light blue (same as microvillar in diagram)
-    darkColor: '#0284c7',   
-    hoverColor: '#bae6fd',  
-    description: 'A specialized chemosensory epithelial cell featuring an apical tuft of microvilli. They are often involved in immune surveillance and response to irritants or allergens.',
-    markers: ['Dclk1', 'Pou2f3', 'Trpm5'],
-    functions: [
-      'Chemosensation of irritants/metabolites',
-      'Initiation of type 2 immune responses'
-    ],
-    perturbationIds: []
-  },
+
   {
     id: 'oec',
-    name: 'Olfactory Ensheathing Cell (OEC)',
+    name: 'Olfactory Ensheathing Cells (OECs)',
     shortName: 'OEC',
     layer: 'basement',
     color: '#a8a29e',      // stone-400
     darkColor: '#78716c',   // stone-500
     hoverColor: '#d6d3d1',  // stone-300
-    description: 'Specialized glial cells that ensheath bundles of unmyelinated olfactory sensory neuron axons as they exit the epithelium and travel through the cribriform plate. They play a critical role in supporting axon growth and guiding them to the olfactory bulb.',
-    markers: ['GFAP', 'S100β', 'p75NTR'],
+    description: 'Specialized glial cells that ensheath bundles of olfactory sensory neuron axons as they leave the epithelium and project toward the olfactory bulb.',
+    markers: ['S100B', 'PLP1', 'GFAP', 'p75NTR'],
     functions: [
       'Ensheath and support OSN axons',
       'Provide growth-promoting environment',
@@ -255,14 +208,14 @@ export const cellTypes: CellType[] = [
   },
   {
     id: 'fibroblast',
-    name: 'Lamina Propria Fibroblast',
+    name: 'Lamina Propria Fibroblasts',
     shortName: 'Fibroblast',
     layer: 'basement',
     color: '#f472b6',      // pink-400
     darkColor: '#db2777',   // pink-600
     hoverColor: '#fdf2f8',  // pink-50
-    description: 'Stromal cells residing in the lamina propria beneath the olfactory epithelium. They secrete the extracellular matrix (collagens, fibronectin) that provides structural integrity, and produce signaling factors important for epithelial maintenance and regeneration.',
-    markers: ['Vimentin', 'PDGFRα', 'Collagen I'],
+    description: 'Stromal cells of the lamina propria that produce extracellular matrix and paracrine signals supporting tissue structure and repair.',
+    markers: ['VIM', 'PDGFRA', 'COL1A1'],
     functions: [
       'Extracellular matrix (ECM) production',
       'Structural support of the lamina propria',
@@ -272,100 +225,7 @@ export const cellTypes: CellType[] = [
   }
 ];
 
-export const perturbations: Perturbation[] = [
-  {
-    id: 'p63-knockdown',
-    name: 'p63 (Trp63) Knockdown',
-    targetCellId: 'hbc',
-    shortDescription: 'Remove the molecular brake that keeps HBCs dormant',
-    fullDescription: 'p63 is a transcription factor critical for maintaining HBC quiescence. When p63 expression is lost — either through genetic knockout or after severe injury — HBCs exit their dormant state and begin to proliferate and differentiate, reconstituting the entire olfactory epithelium.',
-    steps: [
-      {
-        label: 'HBC (Quiescent)',
-        description: 'HBCs express high levels of p63, which keeps them in a dormant, quiescent state on the basal lamina.',
-        cellId: 'hbc',
-        color: '#e9d5ff'
-      },
-      {
-        label: 'p63 Removed',
-        description: 'p63 expression is knocked down. The molecular brake on HBC self-renewal and differentiation is released.',
-        cellId: 'hbc',
-        color: '#f87171'
-      },
-      {
-        label: 'HBC Activated',
-        description: 'Without p63, HBCs exit quiescence, begin proliferating, and upregulate differentiation-associated transcription factors.',
-        cellId: 'hbc',
-        color: '#c084fc'
-      },
-      {
-        label: 'GBC',
-        description: 'Activated HBCs differentiate into Globose Basal Cells (GBCs), the transit-amplifying progenitors.',
-        cellId: 'gbc',
-        color: '#fde68a'
-      },
-      {
-        label: 'iOSN',
-        description: 'GBCs give rise to immature Olfactory Sensory Neurons, which begin extending axons toward the olfactory bulb.',
-        cellId: 'iosn',
-        color: '#c7d2fe'
-      },
-      {
-        label: 'mOSN + Sus Cell',
-        description: 'iOSNs mature into fully functional mOSNs. GBCs also produce new Sustentacular cells. The epithelium is reconstituted.',
-        cellId: 'mosn',
-        color: '#bfdbfe'
-      }
-    ],
-    reference: 'Schnittke et al., J Neurosci (2015); Fletcher et al., J Neurosci (2011)'
-  },
-  {
-    id: 'methimazole-injury',
-    name: 'Methimazole Chemical Injury',
-    targetCellId: 'hbc',
-    shortDescription: 'Simulate widespread OE destruction and observe full regeneration',
-    fullDescription: 'Methimazole is a drug metabolized by CYP enzymes in sustentacular cells, producing a toxic intermediate that causes widespread cell death throughout the olfactory epithelium. Only HBCs survive (protected by their basal position and lack of CYP expression), and they subsequently activate to regenerate the entire tissue.',
-    steps: [
-      {
-        label: 'Normal OE',
-        description: 'The olfactory epithelium is intact with all cell types present and functional.',
-        cellId: 'mosn',
-        color: '#bfdbfe'
-      },
-      {
-        label: 'Methimazole Applied',
-        description: 'Methimazole is administered. CYP enzymes in sustentacular cells metabolize it into a toxic intermediate.',
-        cellId: 'sustentacular',
-        color: '#f87171'
-      },
-      {
-        label: 'Widespread Death',
-        description: 'OSNs, GBCs, and sustentacular cells are destroyed. Only HBCs survive on the denuded basal lamina.',
-        cellId: 'hbc',
-        color: '#fca5a5'
-      },
-      {
-        label: 'HBC Activation',
-        description: 'Surviving HBCs downregulate p63, exit quiescence, and begin to proliferate.',
-        cellId: 'hbc',
-        color: '#c084fc'
-      },
-      {
-        label: 'GBC Expansion',
-        description: 'Activated HBCs generate GBCs, which rapidly expand as transit-amplifying progenitors.',
-        cellId: 'gbc',
-        color: '#fde68a'
-      },
-      {
-        label: 'Full Regeneration',
-        description: 'GBCs differentiate into iOSNs → mOSNs and sustentacular cells. The epithelium is fully regenerated within 6–8 weeks.',
-        cellId: 'mosn',
-        color: '#86efac'
-      }
-    ],
-    reference: 'Leung et al., J Comp Neurol (2007); Gadye et al., Cell Stem Cell (2017)'
-  }
-];
+export const perturbations: Perturbation[] = [];
 
 export const getCellById = (id: string): CellType | undefined =>
   cellTypes.find(cell => cell.id === id);
