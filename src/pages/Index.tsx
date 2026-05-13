@@ -85,7 +85,7 @@ export default function HomePage() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"
             >
-              <Card className="text-center hover:shadow-md transition-shadow dark:bg-slate-900 dark:border-slate-800">
+              <Card className="text-center dark:bg-slate-900 dark:border-slate-800">
                 <CardContent className="pt-6">
                   <Users className="w-8 h-8 text-blue-600 mx-auto mb-2" />
                   <div className="text-2xl font-bold text-gray-900 dark:text-white">
@@ -95,14 +95,14 @@ export default function HomePage() {
                   <div className="text-sm text-gray-600 dark:text-gray-400">People with olfactory dysfunction globally</div>
                 </CardContent>
               </Card>
-              <Card className="text-center hover:shadow-md transition-shadow dark:bg-slate-900 dark:border-slate-800">
+              <Card className="text-center dark:bg-slate-900 dark:border-slate-800">
                 <CardContent className="pt-6">
                   <BookOpen className="w-8 h-8 text-green-600 mx-auto mb-2" />
                   <div className="text-2xl font-bold text-gray-900 dark:text-white">Every other week</div>
                   <div className="text-sm text-gray-600 dark:text-gray-400">New article or an update in the interactive basic science section</div>
                 </CardContent>
               </Card>
-              <Card className="text-center hover:shadow-md transition-shadow dark:bg-slate-900 dark:border-slate-800">
+              <Card className="text-center dark:bg-slate-900 dark:border-slate-800">
                 <CardContent className="pt-6">
                   <Lightbulb className="w-8 h-8 text-purple-600 mx-auto mb-2" />
                   <div className="text-2xl font-bold text-gray-900 dark:text-white">Plain</div>
