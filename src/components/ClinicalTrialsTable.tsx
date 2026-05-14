@@ -169,10 +169,7 @@ export function ClinicalTrialsTable() {
                             </Badge>
                         </div>
                     </div>
-                    <div className="flex flex-col items-end gap-1">
-                        <Badge variant="secondary" className="bg-white/50 dark:bg-black/20">
-                            Automatic updates: Weekly
-                        </Badge>
+                    <div className="flex flex-col items-end justify-center">
                         <div className="text-xs text-blue-600 dark:text-blue-400">
                             Last refreshed: {dataUpdatedAt ? new Date(dataUpdatedAt).toLocaleDateString() : 'Fetching...'}
                         </div>
