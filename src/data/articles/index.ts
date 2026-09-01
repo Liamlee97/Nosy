@@ -20,12 +20,11 @@ import { monellCenter } from './FH_260127_monell-center';
 import { cloquetOsphresiologie } from './FH_260210_cloquet-osphresiologie';
 import { helenKellerSmell } from './FH_260224_helen-keller-smell';
 import { mombaertsGlomerularMap } from './FH_260310_mombaerts-glomerular-map';
-import { smellSleepCircadian } from './FH_260324_smell-sleep-circadian';
-import { geneticVariationSmell } from './FH_260407_genetic-variation-smell';
-import { combinatorialCoding } from './FH_260421_combinatorial-coding';
-import { trigeminalChemesthesis } from './FH_260505_trigeminal-chemesthesis';
-import { retronasalOlfaction } from './FH_260519_retronasal-olfaction';
-import { mucusObps } from './FH_260602_mucus-obps';
+import { smellSleepCircadian } from './FH_260413_smell-sleep-circadian';
+import { geneticVariationSmell } from './FH_260501_genetic-variation-smell';
+import { retronasalOlfaction } from './FH_260602_retronasal-olfaction';
+import { mucusObps } from './FH_260629_mucus-obps';
+import { trigeminalChemesthesis } from './FH_260715_trigeminal-chemesthesis';
 
 export type { Article };
 
@@ -50,7 +49,12 @@ export const articlesData: Record<string, Article> = {
     "monell-center": monellCenter,
     "cloquet-osphresiologie": cloquetOsphresiologie,
     "helen-keller-smell": helenKellerSmell,
-    "mombaerts-glomerular-map": mombaertsGlomerularMap
+    "mombaerts-glomerular-map": mombaertsGlomerularMap,
+    "smell-sleep-circadian": smellSleepCircadian,
+    "genetic-variation-smell": geneticVariationSmell,
+    "retronasal-olfaction": retronasalOlfaction,
+    "mucus-obps": mucusObps,
+    "trigeminal-chemesthesis": trigeminalChemesthesis
 };
 
 export const getAllArticles = () => Object.values(articlesData);

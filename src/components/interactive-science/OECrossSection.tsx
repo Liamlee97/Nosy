@@ -7,6 +7,7 @@ interface OECrossSectionProps {
   hoveredCellId: string | null;
   onCellSelect: (cellId: string) => void;
   onCellHover: (cellId: string | null) => void;
+  experimentState?: string | null;
 }
 
 export default function OECrossSection({
@@ -14,6 +15,7 @@ export default function OECrossSection({
   hoveredCellId,
   onCellSelect,
   onCellHover,
+  experimentState = null,
 }: OECrossSectionProps) {
   const [hoveredInstanceId, setHoveredInstanceId] = useState<string | null>(null);
   const [isTouch, setIsTouch] = useState(false);
@@ -43,12 +45,22 @@ export default function OECrossSection({
     const isTypeHovered = hoveredCellId === typeId;
     const isSelected = selectedCellId === typeId;
     const c = cellTypes.find(ct => ct.id === typeId)!;
+    
+    // Experiment states logic
+    const isP63Ko = experimentState === 'p63-ko';
+    
     let fill = c.color, stroke = c.darkColor, strokeWidth = 1.5, opacity = 1;
-    if (isSelected) { fill = c.hoverColor; stroke = '#0f172a'; strokeWidth = 3.5; }
+    
+    if (isP63Ko && typeId === 'hbc') {
+      opacity = 0; // Fade out HBCs in p63-ko
+    } else if (isSelected) { 
+      fill = c.hoverColor; stroke = '#0f172a'; strokeWidth = 3.5; 
+    }
     else if (isHovered) { fill = c.hoverColor; strokeWidth = 3; }
     else if (isTypeHovered) { fill = c.hoverColor; opacity = 0.95; }
     else if (hoveredCellId || selectedCellId) { opacity = 0.35; }
-    return { fill, stroke, strokeWidth, opacity, transition: 'all 0.25s ease' };
+    
+    return { fill, stroke, strokeWidth, opacity, transition: 'all 0.5s ease' };
   };
 
   const getLineStyle = (instanceId: string, typeId: string) => {
@@ -56,12 +68,19 @@ export default function OECrossSection({
     const isHovered = hoveredInstanceId === instanceId;
     const isTypeHovered = hoveredCellId === typeId;
     const isSelected = selectedCellId === typeId;
+    
+    const isP63Ko = experimentState === 'p63-ko';
+
     let stroke = c.darkColor, strokeWidth = 2.5, opacity = 1;
-    if (isSelected) { stroke = '#0f172a'; strokeWidth = 4; }
+    
+    if (isP63Ko && typeId === 'hbc') {
+      opacity = 0; // Fade out HBC lines in p63-ko
+    } else if (isSelected) { stroke = '#0f172a'; strokeWidth = 4; }
     else if (isHovered) { strokeWidth = 4; }
     else if (isTypeHovered) { opacity = 0.95; }
     else if (hoveredCellId || selectedCellId) { opacity = 0.35; }
-    return { fill: 'none', stroke, strokeWidth, opacity, transition: 'all 0.25s ease' };
+    
+    return { fill: 'none', stroke, strokeWidth, opacity, transition: 'all 0.5s ease' };
   };
 
   const Cell = ({ id, typeId, children, isLine }: {

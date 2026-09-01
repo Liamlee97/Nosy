@@ -5,6 +5,7 @@ import SEO from '@/components/SEO';
 import OECrossSection from '@/components/interactive-science/OECrossSection';
 import CellInfoPanel from '@/components/interactive-science/CellInfoPanel';
 import PerturbationView from '@/components/interactive-science/PerturbationView';
+import StudySelector from '@/components/interactive-science/StudySelector';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Layers, Microscope, FlaskConical } from 'lucide-react';
 import { cellTypes } from '@/data/oeData';
@@ -13,6 +14,7 @@ export default function InteractiveSciencePage() {
   const [selectedCellId, setSelectedCellId] = useState<string | null>(null);
   const [hoveredCellId, setHoveredCellId] = useState<string | null>(null);
   const [activePerturbationId, setActivePerturbationId] = useState<string | null>(null);
+  const [activeExperimentState, setActiveExperimentState] = useState<string | null>(null);
 
   const handleCellSelect = (cellId: string) => {
     setSelectedCellId(cellId);
@@ -96,6 +98,7 @@ export default function InteractiveSciencePage() {
                 hoveredCellId={hoveredCellId}
                 onCellSelect={handleCellSelect}
                 onCellHover={setHoveredCellId}
+                experimentState={activeExperimentState}
               />
             </motion.div>
 
@@ -145,6 +148,14 @@ export default function InteractiveSciencePage() {
               onClose={handleClosePerturbation}
             />
           </div>
+        </section>
+
+        {/* Basic Science Studies Section */}
+        <section className="px-4">
+          <StudySelector 
+            onSelectExperiment={setActiveExperimentState} 
+            activeExperimentState={activeExperimentState} 
+          />
         </section>
 
         {/* Bottom info section */}
