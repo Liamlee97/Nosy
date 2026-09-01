@@ -2,7 +2,7 @@ import { Article } from './types';
 
 export const pheromoneStory: Article = {
     id: "pheromone-story",
-    title: "The Pheromone Story 🦋",
+    title: "The Pheromone Story",
     excerpt: "500,000 moths, a Nobel laureate, and a powerful molecule that attracts from hundreds of meters away.",
     category: "Fascinating History & Facts",
     readingTime: 4,

@@ -2,7 +2,7 @@ import { Article } from './types';
 
 export const joyMilneParkinsons: Article = {
     id: "joy-milne-parkinsons",
-    title: "The Woman Who Could Smell Parkinson's Disease 👃",
+    title: "The Woman Who Could Smell Parkinson's Disease",
     excerpt: "Joy Milne noticed her husband smelled different years before his diagnosis. Scientists confirmed she was right and it may change how we detect disease.",
     category: "Fascinating History & Facts",
     readingTime: 5,
