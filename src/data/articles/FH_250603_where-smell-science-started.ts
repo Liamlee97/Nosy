@@ -27,11 +27,13 @@ export const whereSmellScienceStarted: Article = {
         }
     },
     content: `
-**What does a 17th-century brain map, the first smell textbook, and a hedgehog's brainwaves all have in common? They each marked turning points in the story of olfactory science.**
+**What does a seventeenth-century brain atlas, an early French treatise on odors, a glass olfactometer, and a hedgehog's olfactory bulb have in common? Each marks a moment when smell became easier to describe, measure, or study as a biological system.**
 
-## A While Back...
+## Before Modern Smell Science
 
-Long before neuroscience was an established discipline, Thomas Willis (1621–1675) produced some of the earliest detailed anatomical descriptions of the brain and cranial nerves. In his 1664 work *Cerebri Anatome*, he highlighted the olfactory tract as the first cranial nerve [1][2].
+People have wondered about odors for millennia. Ancient physicians and philosophers discussed the nose, breathing, and the effects of scents, but they lacked a modern understanding of nerves, receptors, and the brain.
+
+A major early-modern step came in 1664, when English physician Thomas Willis published *Cerebri Anatome*. The book was a deeply influential account of the brain and cranial nerves, helping shift the study of the nervous system toward detailed anatomy. Willis described the olfactory nerves and pathways as part of this new anatomical framework [1][2].
 
 :::callout
 **Fun Fact:** Thomas Willis didn't start out as an anatomist, but once he did, he believed brain dissection could literally reveal the secrets of the human soul. In Cerebri Anatome (1664), he wrote that anatomy could "unlock the secret places of Man's Mind." He saw the nervous system as a God-designed blueprint shared with animals, while humans held an extra immortal soul.
@@ -39,35 +41,39 @@ Long before neuroscience was an established discipline, Thomas Willis (1621–16
 
 :::image(cerebrianatome)
 
-## The First Smell Textbook in 1821
+## A Treatise Devoted to Smell
 
-For nearly two centuries after Willis, smell remained a curiosity without its own science. That changed in **1821**, when French physician **Joseph Hippolyte Cloquet** published *Osphresiologie, ou Traité des Odeurs* — likely the world's first comprehensive monograph devoted entirely to the sense of smell [3].
+In 1821, French physician Joseph Hippolyte Cloquet published *Osphrésiologie, ou Traité des Odeurs, du Sens et des Organes de l’Olfaction*. It was one of the earliest comprehensive works devoted specifically to odor, smell, and the anatomy and diseases of the nose [3].
 
-Cloquet's treatise covered anatomy, physiology, pathology, and even the cultural significance of odor. He cataloged types of smell loss and proposed early classification systems, predating the better-known schemes of Zwaardemaker by over 70 years. It was an ambitious attempt to treat smell as a legitimate field of study — not just a footnote in anatomy textbooks.
+Cloquet discussed olfactory anatomy, physiology, pathology, and odor classification. He also argued that the olfactory region was located high in the nasal cavity, which was an important correction to earlier ideas about where smell occurred. His book helped establish smell as a subject that could be studied systematically rather than merely described [3].
 
 :::image(cloquet)
 
-## When Smell Became Testable
+## When Smell Became Measurable
 
-Jump to the late 1800s. Paul Broca (probably best known for discovering speech areas in the brain) placed our sense of smell on the anatomical map. He identified a ring of deep brain structures that earned the nickname the 'nose-brain' (rhinencephalon), and went a step further: he classified mammals as "osmatic" (smell-dominant, like dogs) or "anosmatic" (smell-reduced, like humans), and placed us firmly in the latter category [4]. His view was that for humans to develop higher intelligence and gain free will, our primitive smell center had to shrink. It was an influential idea, but one that has since been largely debunked.
+Nineteenth-century investigators increasingly tried to make smell measurable. Paul Broca’s comparative anatomy helped popularize the term *rhinencephalon*, or “nose-brain,” for structures associated with olfaction. In 1879, Broca divided mammals into *osmatique* and *anosmatique* groups, placing humans in the latter category because he believed human behavior was less driven by smell [4].
 
-Then came **Zwaardemaker in 1895**, who brought instruments into the mix. In his treatise *Die Physiologie des Geruchs*, he introduced the **olfactometer**, a glass-and-metal contraption used to deliver known amounts of odor in a controlled way [5].
+That classification was not based on formal testing of human olfactory ability. It reflected Broca’s anatomical observations and his broader philosophical view of human free will. Later writers converted this idea into the familiar (but misleading) claim that humans are inherently poor smellers. Modern evidence shows that humans can distinguish an enormous range of odors and can perform remarkably well in several olfactory tasks [4].
+
+Meanwhile, Dutch physiologist Hendrik Zwaardemaker helped make smell testable. He developed an olfactometer in the late 1880s, using an apparatus designed to control odor exposure and estimate detection thresholds. His 1895 treatise, *Die Physiologie des Geruchs*, became a landmark work in olfactory psychophysics [5].
 
 :::image(olfactometer)
 
-Suddenly, smell wasn't just abstract. It was measurable. This made it possible for the first time to quantify smell thresholds systematically. Shortly after, the idea of **olfactory fatigue** was introduced: your nose gives up temporarily after too much stimulation. Ever stopped noticing your perfume after a few minutes? That's olfactory fatigue at work.
+This did not solve every problem in smell measurement, but it established an important principle: odor perception could be studied with controlled stimuli rather than anecdotes alone.
 
 ## Smell Meets Electricity
 
-The modern era kicked off in the **1940s** when Edgar Adrian (a Nobel laureate for his broader work on nerve signaling) turned his attention to the olfactory system of the hedgehog [6]. Using fine electrodes, he recorded electrical activity from the olfactory bulb and made a startling observation: different odors produced distinct spatial patterns of activity across the bulb — the first evidence that the brain might organize smells as a kind of map, not just a single on/off signal.
+In 1942, Nobel laureate Edgar Adrian recorded electrical activity from the olfactory bulb of the hedgehog. He found that different odorants could produce different, spatially distributed patterns of activity across the bulb [6]. The experiments were an early foundation for the modern idea that odor information is represented across organized neural populations rather than by a single on–off signal.
 
-By the 1950s, Swedish physiologist Ulf Ottoson had created the **electro-olfactogram (EOG)** [7]. Instead of recording from nerves or the brain, the EOG captured the electrical response directly from the olfactory epithelium (the smell-sensing surface inside your nose!). It looked like sci-fi but gave real data on how noses detect odors.
+In the 1950s, David Ottoson characterized the electro-olfactogram, or EOG: a slow electrical potential recorded from the olfactory epithelium in response to an odor stimulus [7]. The EOG gave researchers a way to measure events near the sensory surface itself, complementing recordings from nerves and the brain.
 
 ## Why It Still Matters
 
 These pioneers didn't have modern labs or brain scans. But with clever ideas and strange tools, they laid the foundation for everything we know about smell today.
 
-So the next time you catch a whiff of fresh bread or wet pavement, remember: you're experiencing something scientists have been trying to decode for centuries (and still are).
+Willis helped make olfactory anatomy visible. Cloquet treated smell as a subject worthy of its own systematic study. Zwaardemaker helped turn perception into a measurable outcome. Adrian and Ottoson made odor responses electrically observable.
+
+Together, these advances laid groundwork for the modern study of olfactory receptors, neural circuits, smell loss, flavor, and the everyday mystery of how a few airborne molecules can become the experience of fresh bread, rain, coffee, or smoke.
   `,
     sources: [
         {
